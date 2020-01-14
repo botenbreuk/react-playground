@@ -3,26 +3,46 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.4.0",
-    "@testing-library/user-event": "^7.2.1",
-    "@types/jest": "^24.0.25",
-    "@types/node": "^12.12.24",
-    "@types/react": "^16.9.17",
-    "@types/react-dom": "^16.9.4",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
+    "bootstrap": "4.4.1",
+    "react": "16.12.0",
+    "react-dom": "16.12.0",
     "react-scripts": "3.3.0",
-    "typescript": "^3.7.4"
+    "reactstrap": "8.2.0"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "4.2.4",
+    "@testing-library/react": "9.4.0",
+    "@testing-library/user-event": "8.0.3",
+    "@types/jest": "24.0.25",
+    "@types/node": "13.1.6",
+    "@types/react": "16.9.17",
+    "@types/react-dom": "16.9.4",
+    "husky": "4.0.6",
+    "prettier": "1.19.1",
+    "typescript": "3.7.4"
   },
   "scripts": {
-    "start": "react-scripts start",
     "build": "react-scripts build",
+    "coverage": "npm run test -- --coverage --watchAll=false",
+    "create-env": "echo \"SKIP_PREFLIGHT_CHECK=true\nREACT_APP_VERSION=${npm_package_version}\nBUILD_TIME=\"$(date +%Y-%m-%dT%H:%M:%S%z)\"\n\" > .env",
+    "eject": "react-scripts eject",
+    "lint": "eslint src --ext js,jsx,ts,tsx --max-warnings=0",
+    "serve-build": "npm run build && cd server && npm install && node ./index.js",
+    "start": "react-scripts start",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "test-all": "npm run create-env && npm run lint && npm run ts && npm run coverage",
+    "ts": "tsc --version && tsc"
   },
-  "eslintConfig": {
-    "extends": "react-app"
+  "lint-staged": {
+    "{src,test}/**/*.{js,jsx,json,scss,tsx,ts}": [
+      "prettier --single-quote --write",
+      "git add"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "browserslist": {
     "production": [
