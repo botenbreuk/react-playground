@@ -1,20 +1,27 @@
 import React from 'react';
 import { Nav, NavItem, NavLink } from 'reactstrap';
+import { NavLink as RRNavLink } from 'react-router-dom';
 
 export default function Menu() {
   return (
     <Nav vertical className="text-right">
       <NavItem>
-        <NavLink href="#">Link</NavLink>
+        <NavLink to="/" tag={RRNavLink}>
+          Home
+        </NavLink>
       </NavItem>
       <NavItem>
-        <NavLink href="#">Link</NavLink>
+        <NavLink to="/about" tag={RRNavLink}>
+          About
+        </NavLink>
       </NavItem>
       <NavItem>
-        <NavLink href="#">Another Link</NavLink>
+        <NavLink to="#" tag={RRNavLink}>
+          Another Link
+        </NavLink>
       </NavItem>
       <NavItem>
-        <NavLink disabled href="#">
+        <NavLink disabled to="#" tag={RRNavLink}>
           Disabled Link
         </NavLink>
       </NavItem>
