@@ -16,8 +16,8 @@ export default function Menu() {
         </NavLink>
       </NavItem>
       <NavItem>
-        <NavLink to="#" tag={RRNavLink}>
-          Another Link
+        <NavLink to="/shuffle" tag={RRNavLink}>
+          Shuffle
         </NavLink>
       </NavItem>
       <NavItem>

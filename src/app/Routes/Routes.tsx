@@ -1,6 +1,8 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import App from '../App/App';
+import { Page } from '../../ui';
+import ShuffleList from '../Shuffle/ShuffleList';
 
 export default function Routes() {
   return (
@@ -9,7 +11,12 @@ export default function Routes() {
         <Route exact path="/">
           <App />
         </Route>
-        <Route path="/about"></Route>
+        <Route exact path="/shuffle">
+          <ShuffleList />
+        </Route>
+        <Route path="/about">
+          <Page />
+        </Route>
       </Switch>
     </Router>
   );
