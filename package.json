@@ -3,43 +3,56 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "bootstrap": "4.4.1",
-    "react": "16.12.0",
-    "react-dom": "16.12.0",
-    "react-router-dom": "^5.1.2",
-    "react-scripts": "3.3.0",
-    "reactstrap": "8.2.0"
+    "bootstrap": "4.5.3",
+    "immutability-helper": "^3.1.1",
+    "lodash": "4.17.20",
+    "react": "17.0.1",
+    "react-dnd": "11.1.3",
+    "react-dnd-html5-backend": "11.1.3",
+    "react-dom": "17.0.1",
+    "react-router-dom": "5.2.0",
+    "react-scripts": "4.0.1",
+    "reactstrap": "8.7.1"
   },
   "devDependencies": {
-    "@types/react-router-dom": "5.1.3",
-    "@types/reactstrap": "8.2.0",
-    "@testing-library/jest-dom": "4.2.4",
-    "@testing-library/react": "9.4.0",
-    "@testing-library/user-event": "8.0.3",
-    "@types/jest": "24.0.25",
-    "@types/node": "13.1.6",
-    "@types/react": "16.9.17",
-    "@types/react-dom": "16.9.4",
-    "husky": "4.0.6",
-    "prettier": "1.19.1",
-    "typescript": "3.7.4"
+    "@testing-library/jest-dom": "5.11.6",
+    "@testing-library/react": "11.2.2",
+    "@testing-library/user-event": "12.6.0",
+    "@types/jest": "26.0.19",
+    "@types/lodash": "4.14.165",
+    "@types/node": "14.14.14",
+    "@types/react": "17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "@types/react-router-dom": "5.1.6",
+    "@types/reactstrap": "8.7.2",
+    "@typescript-eslint/eslint-plugin": "4.11.0",
+    "@typescript-eslint/parser": "4.11.0",
+    "eslint": "7.16.0",
+    "eslint-config-react-app": "6.0.0",
+    "eslint-plugin-flowtype": "5.2.0",
+    "eslint-plugin-import": "2.22.1",
+    "eslint-plugin-jsx-a11y": "6.4.1",
+    "eslint-plugin-react": "7.21.5",
+    "husky": "4.3.6",
+    "lint-staged": "10.5.3",
+    "prettier": "2.2.1",
+    "typescript": "4.1.3"
   },
   "scripts": {
-    "build": "react-scripts build",
+    "build": "npm run create-env && react-scripts build",
     "coverage": "npm run test -- --coverage --watchAll=false",
+    "create": "npm run create-env",
     "create-env": "echo \"SKIP_PREFLIGHT_CHECK=true\nREACT_APP_VERSION=${npm_package_version}\nBUILD_TIME=\"$(date +%Y-%m-%dT%H:%M:%S%z)\"\n\" > .env",
-    "eject": "react-scripts eject",
     "lint": "eslint src --ext js,jsx,ts,tsx --max-warnings=0",
     "serve-build": "npm run build && cd server && npm install && node ./index.js",
-    "start": "react-scripts start",
+    "start": "npm run create && react-scripts start",
     "test": "react-scripts test",
-    "test-all": "npm run create-env && npm run lint && npm run ts && npm run coverage",
+    "test-all": "npm run create-env && npm run lint && npm run ts && npm run test -- --watchAll=true",
     "ts": "tsc --version && tsc"
   },
   "lint-staged": {
     "{src,test}/**/*.{js,jsx,json,scss,tsx,ts}": [
-      "prettier --single-quote --write",
-      "git add"
+      "prettier --single-quote --write"
     ]
   },
   "husky": {
@@ -47,16 +60,32 @@
       "pre-commit": "lint-staged"
     }
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{ts,tsx}",
+      "!src/core/index.ts",
+      "!src/index.tsx",
+      "!src/i18n.ts",
+      "!src/error.ts",
+      "!src/registerServiceWorker.ts"
     ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  }
+    "moduleNameMapper": {
+      "^dnd-core$": "dnd-core/dist/cjs",
+      "^react-dnd$": "react-dnd/dist/cjs",
+      "^react-dnd-html5-backend$": "react-dnd-html5-backend/dist/cjs",
+      "^react-dnd-touch-backend$": "react-dnd-touch-backend/dist/cjs",
+      "^react-dnd-test-backend$": "react-dnd-test-backend/dist/cjs",
+      "^react-dnd-test-utils$": "react-dnd-test-utils/dist/cjs"
+    }
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "files": [
+    "dist",
+    "version.txt"
+  ]
 }
