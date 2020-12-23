@@ -21,6 +21,16 @@ export default function Menu() {
         </NavLink>
       </NavItem>
       <NavItem>
+        <NavLink to="/dnd" tag={RRNavLink}>
+          Drag and Drop
+        </NavLink>
+      </NavItem>
+      <NavItem>
+        <NavLink to="/dnd-sort" tag={RRNavLink}>
+          Drag and Drop - sort
+        </NavLink>
+      </NavItem>
+      <NavItem>
         <NavLink disabled to="#" tag={RRNavLink}>
           Disabled Link
         </NavLink>
