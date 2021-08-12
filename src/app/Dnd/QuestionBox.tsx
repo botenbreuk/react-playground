@@ -66,12 +66,13 @@ export default function QuestionBox(props: Props) {
     }
   });
 
-  const [{ opacity }, drag] = useDrag({
-    item: { type: QuestionTypes.UPDATE_QUESTION, id, index },
+  const [{ opacity }, drag] = useDrag(() => ({
+    type: QuestionTypes.UPDATE_QUESTION,
+    item: { id, index },
     collect: (monitor: any) => ({
       opacity: monitor.isDragging() ? 0.4 : 1
     })
-  });
+  }));
   drag(drop(ref));
 
   let backgroundColor = 'black';

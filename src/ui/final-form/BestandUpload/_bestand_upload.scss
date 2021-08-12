@@ -1,0 +1,30 @@
+.dropzone {
+  margin-top: 10px;
+  height: 120px;
+  border: dashed $panel-gray 2px;
+  text-align: center;
+
+  &:hover,
+  &:focus {
+    border: dashed $gray 2px;
+  }
+
+  span {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    line-height: 2.2;
+
+    p {
+      margin: 0;
+    }
+  }
+}
+
+.bijlage-lijst div a {
+  padding: 0px;
+  margin: 1px;
+  float: right;
+  cursor: pointer;
+}

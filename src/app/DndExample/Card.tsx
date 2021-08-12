@@ -79,12 +79,13 @@ export default function Card(props: CardProps) {
     }
   });
 
-  const [{ isDragging }, drag] = useDrag({
-    item: { type: ItemTypes.CARD, id, index },
+  const [{ isDragging }, drag] = useDrag(() => ({
+    type: ItemTypes.CARD,
+    item: { id, index },
     collect: (monitor: any) => ({
       isDragging: monitor.isDragging()
     })
-  });
+  }));
 
   const opacity = isDragging ? 0 : 1;
   drag(drop(ref));

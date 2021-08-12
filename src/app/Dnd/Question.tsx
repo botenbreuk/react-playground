@@ -18,12 +18,13 @@ interface Props {
 
 export default function Question(props: Props) {
   const { name } = props;
-  const [{ isDragging }, drag] = useDrag({
-    item: { name, type: QuestionTypes.NEW_QUESTION },
+  const [{ isDragging }, drag] = useDrag(() => ({
+    type: QuestionTypes.NEW_QUESTION,
+    item: { name },
     collect: monitor => ({
       isDragging: monitor.isDragging()
     })
-  });
+  }));
   const opacity = isDragging ? 0.4 : 1;
 
   return (

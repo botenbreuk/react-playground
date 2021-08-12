@@ -31,7 +31,7 @@ interface Props {
 export default function QuestionList(props: Props) {
   const { value, onChange } = props;
 
-  const [{ canDrop, isOver }, drop] = useDrop({
+  const [{ canDrop, isOver }, drop] = useDrop(() => ({
     accept: QuestionTypes.NEW_QUESTION,
     drop(item: BoxType) {
       const copy: BoxType[] = [...value];
@@ -44,7 +44,7 @@ export default function QuestionList(props: Props) {
       isOver: monitor.isOver(),
       canDrop: monitor.canDrop()
     })
-  });
+  }));
 
   const moveCard = useCallback(
     (dragIndex: number, hoverIndex: number) => {
