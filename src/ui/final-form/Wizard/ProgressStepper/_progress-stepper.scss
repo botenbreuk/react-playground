@@ -1,0 +1,127 @@
+.ProgressStepper {
+  hr {
+    border-top: 1px solid $gray-lighter;
+    width: 100%;
+  }
+
+  ul {
+    display: inline;
+    position: relative;
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+  }
+
+  .step {
+    width: 25%;
+    position: relative;
+    float: left;
+    margin-bottom: -1px;
+    display: block;
+
+    &:after {
+      content: '';
+      position: absolute;
+      background: $gray-lighter;
+      display: block;
+      width: 100%;
+      height: 5px;
+      top: 30px;
+      left: 50%;
+      z-index: 1;
+    }
+
+    &:last-child {
+      &::after {
+        background: none;
+        width: 0%;
+      }
+    }
+
+    .progress-circle {
+      position: relative;
+      width: 25px;
+      height: 25px;
+      margin: 20px auto;
+      border-radius: 100%;
+      border: none;
+      padding: 0;
+
+      span {
+        width: 25px;
+        height: 25px;
+        line-height: 22px;
+        display: inline-block;
+        border-radius: 25px;
+        background: #fff;
+        z-index: 2;
+        position: absolute;
+        left: 0;
+        text-align: center;
+        font-size: 14px;
+        font-weight: lighter;
+      }
+    }
+
+    .progress-label {
+      position: relative;
+      top: -10px;
+      color: $text-color;
+      text-align: center;
+      font-weight: lighter;
+      font-style: italic;
+    }
+
+    &.complete {
+      &:after {
+        background: $brand-success;
+      }
+
+      .progress-circle {
+        cursor: pointer;
+
+        color: $brand-success;
+        span {
+          border: 2px solid $brand-success;
+          background-color: $brand-success;
+          color: $brand-success;
+
+          &::after {
+            content: '✔';
+            color: white;
+            position: absolute;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+            top: 0;
+            display: block;
+          }
+        }
+      }
+
+      .progress-label {
+        cursor: pointer;
+      }
+    }
+
+    &.incomplete {
+      .progress-circle {
+        color: $gray-light;
+        span {
+          border: 2px solid $gray-light;
+          color: $gray-light;
+        }
+      }
+    }
+
+    &.current {
+      .progress-circle {
+        color: $gray;
+        span {
+          border: 2px solid $gray;
+          color: $gray;
+        }
+      }
+    }
+  }
+}
