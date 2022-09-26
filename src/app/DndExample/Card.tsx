@@ -27,9 +27,9 @@ interface DragItem {
 export default function Card(props: CardProps) {
   const { id, text, index, moveCard } = props;
   const ref = useRef<HTMLDivElement>(null);
-  const [, drop] = useDrop({
+  const [, drop] = useDrop<DragItem>({
     accept: ItemTypes.CARD,
-    hover(item: DragItem, monitor: DropTargetMonitor) {
+    hover(item, monitor: DropTargetMonitor) {
       if (!ref.current) {
         return;
       }
@@ -80,7 +80,8 @@ export default function Card(props: CardProps) {
   });
 
   const [{ isDragging }, drag] = useDrag({
-    item: { type: ItemTypes.CARD, id, index },
+    type: ItemTypes.CARD,
+    item: { id, index },
     collect: (monitor: any) => ({
       isDragging: monitor.isDragging()
     })

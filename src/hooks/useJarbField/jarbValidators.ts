@@ -5,6 +5,7 @@ import {
 } from '@42.nl/jarb-final-form/lib/utils';
 import * as Validators from '@42.nl/jarb-final-form/lib/validators';
 import { FieldState, FieldValidator } from 'final-form';
+import { useMemo } from 'react';
 
 interface ValidatorConfig<FieldValue> {
   name: string;
@@ -40,22 +41,110 @@ interface ValidatorConfig<FieldValue> {
   asyncValidatorsDebounce?: number;
 }
 
-export function getEnhancedValidate<FieldValue>(
+export function useEnhancedValidate<FieldValue>(
   config: ValidatorConfig<FieldValue>
-): FieldValidator<FieldValue> | undefined {
+) {
   const {
-    jarb = {
-      label: '',
-      validator: ''
-    },
+    jarb,
     validators,
     asyncValidators,
     asyncValidatorsDebounce = 200
   } = config;
 
+  const jarbValidatorFunctions = useMemo(() => {
+    const { label, validator } = jarb;
+
+    const constraints = getConstraints();
+    const validatorFunctions: FieldValidator<FieldValue>[] = [];
+
+    if (constraints !== undefined) {
+      const fieldConstraints = getFieldConstraintsFor(validator, constraints);
+
+      if (fieldConstraints !== false) {
+        const field: FieldType = mostSpecificInputTypeFor(
+          fieldConstraints.types
+        );
+
+        if (fieldConstraints.required) {
+          if (field === 'boolean') {
+            const requiredValidator = Validators.makeBooleanRequired(label);
+            validatorFunctions.push(requiredValidator);
+          } else {
+            const requiredValidator = Validators.makeRequired(label);
+            validatorFunctions.push(requiredValidator);
+          }
+        }
+
+        if (field === 'text') {
+          if (fieldConstraints.minimumLength) {
+            const minimumLengthValidator = Validators.makeMinimumLength(
+              label,
+              fieldConstraints.minimumLength
+            );
+
+            validatorFunctions.push(minimumLengthValidator);
+          }
+
+          if (fieldConstraints.maximumLength) {
+            const maximumLengthValidator = Validators.makeMaximumLength(
+              label,
+              fieldConstraints.maximumLength
+            );
+
+            validatorFunctions.push(maximumLengthValidator);
+          }
+        }
+
+        if (fieldConstraints.min) {
+          const minValueValidator = Validators.makeMinValue(
+            label,
+            fieldConstraints.min
+          );
+
+          validatorFunctions.push(minValueValidator);
+        }
+
+        if (fieldConstraints.max) {
+          const maxValueValidator = Validators.makeMaxValue(
+            label,
+            fieldConstraints.max
+          );
+
+          validatorFunctions.push(maxValueValidator);
+        }
+
+        if (
+          field === 'number' &&
+          fieldConstraints.fractionLength &&
+          fieldConstraints.fractionLength > 0
+        ) {
+          const patternValidator = Validators.makeNumberFraction(
+            label,
+            fieldConstraints.fractionLength
+          );
+
+          validatorFunctions.push(patternValidator);
+        } else if (field === 'number') {
+          const patternValidator = Validators.makeNumber(label);
+
+          validatorFunctions.push(patternValidator);
+        }
+      } else {
+        console.warn(
+          `@42.nl/jarb-final-form: constraints for "${validator}" not found, but a JarbField was rendered, this should not occur, check your validator.`
+        );
+      }
+    } else {
+      console.warn(
+        '@42.nl/jarb-final-form: constraints are empty, but a JarbField was rendered, this should not occur, make sure the constraints are loaded before the form is displayed.'
+      );
+    }
+
+    return validatorFunctions;
+  }, [jarb]);
+
   const passedValidators =
     Array.isArray(validators) && validators ? [...validators] : [];
-  const jarbValidatorFunctions = getJarbConstraints<FieldValue>(jarb);
 
   const asyncValidatorFunctions =
     Array.isArray(asyncValidators) && asyncValidators
@@ -70,7 +159,7 @@ export function getEnhancedValidate<FieldValue>(
 
   async function enhancedValidate(
     value: FieldValue,
-    allValues: Record<string, any>,
+    allValues?: Record<string, any>,
     meta?: FieldState<FieldValue>
   ) {
     // Generate a new async id for this train of async validations.
@@ -129,94 +218,4 @@ export function getEnhancedValidate<FieldValue>(
   }
 
   return enhancedValidate;
-}
-
-function getJarbConstraints<FieldValue>(jarb: JarbProps) {
-  const { label, validator } = jarb;
-
-  const constraints = getConstraints();
-  const validatorFunctions: FieldValidator<FieldValue>[] = [];
-
-  if (constraints !== undefined) {
-    const fieldConstraints = getFieldConstraintsFor(validator, constraints);
-
-    if (fieldConstraints !== false) {
-      const field: FieldType = mostSpecificInputTypeFor(fieldConstraints.types);
-
-      if (fieldConstraints.required) {
-        if (field === 'boolean') {
-          const requiredValidator = Validators.makeBooleanRequired(label);
-          validatorFunctions.push(requiredValidator);
-        } else {
-          const requiredValidator = Validators.makeRequired(label);
-          validatorFunctions.push(requiredValidator);
-        }
-      }
-
-      if (field === 'text') {
-        if (fieldConstraints.minimumLength) {
-          const minimumLengthValidator = Validators.makeMinimumLength(
-            label,
-            fieldConstraints.minimumLength
-          );
-
-          validatorFunctions.push(minimumLengthValidator);
-        }
-
-        if (fieldConstraints.maximumLength) {
-          const maximumLengthValidator = Validators.makeMaximumLength(
-            label,
-            fieldConstraints.maximumLength
-          );
-
-          validatorFunctions.push(maximumLengthValidator);
-        }
-      }
-
-      if (fieldConstraints.min) {
-        const minValueValidator = Validators.makeMinValue(
-          label,
-          fieldConstraints.min
-        );
-
-        validatorFunctions.push(minValueValidator);
-      }
-
-      if (fieldConstraints.max) {
-        const maxValueValidator = Validators.makeMaxValue(
-          label,
-          fieldConstraints.max
-        );
-
-        validatorFunctions.push(maxValueValidator);
-      }
-
-      if (
-        field === 'number' &&
-        fieldConstraints.fractionLength &&
-        fieldConstraints.fractionLength > 0
-      ) {
-        const patternValidator = Validators.makeNumberFraction(
-          label,
-          fieldConstraints.fractionLength
-        );
-
-        validatorFunctions.push(patternValidator);
-      } else if (field === 'number') {
-        const patternValidator = Validators.makeNumber(label);
-
-        validatorFunctions.push(patternValidator);
-      }
-    } else {
-      console.warn(
-        `@42.nl/jarb-final-form: constraints for "${validator}" not found, but a JarbField was rendered, this should not occur, check your validator.`
-      );
-    }
-  } else {
-    console.warn(
-      '@42.nl/jarb-final-form: constraints are empty, but a JarbField was rendered, this should not occur, make sure the constraints are loaded before the form is displayed.'
-    );
-  }
-
-  return validatorFunctions;
 }

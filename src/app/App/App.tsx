@@ -1,5 +1,4 @@
-import React from 'react';
-import { Alert, Button, Jumbotron } from 'reactstrap';
+import { Alert, Button } from 'reactstrap';
 import logo from '../../styles/logo.svg';
 import { ConfirmModal, Page } from '../../ui';
 import './_app.css';
@@ -7,7 +6,7 @@ import './_app.css';
 export default function App() {
   return (
     <Page>
-      <Jumbotron>
+      <div className="container-fluid text-sm-center p-5 bg-light">
         <h1 className="display-3">Hello, world!</h1>
         <p className="lead">
           This is a simple hero unit, a simple Jumbotron-style component for
@@ -21,7 +20,7 @@ export default function App() {
         <p className="lead">
           <Button color="primary">Learn More</Button>
         </p>
-      </Jumbotron>
+      </div>
       <div id="main">
         <div className="content">
           <header className="App-header">

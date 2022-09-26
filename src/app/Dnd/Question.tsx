@@ -19,7 +19,8 @@ interface Props {
 export default function Question(props: Props) {
   const { name } = props;
   const [{ isDragging }, drag] = useDrag({
-    item: { name, type: QuestionTypes.NEW_QUESTION },
+    type: QuestionTypes.NEW_QUESTION,
+    item: { name },
     collect: monitor => ({
       isDragging: monitor.isDragging()
     })

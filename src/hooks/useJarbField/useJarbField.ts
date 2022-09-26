@@ -1,9 +1,7 @@
 import { JarbProps } from '@42.nl/jarb-final-form';
-import { clearErrorsForValidator } from '@42.nl/react-error-store';
 import { FieldValidator } from 'final-form';
-import { useMemo } from 'react';
 import { useField, UseFieldConfig } from 'react-final-form';
-import { getEnhancedValidate } from './jarbValidators';
+import { useEnhancedValidate } from './jarbValidators';
 
 export type JarbFieldInputProps<FieldValue> = JarbFieldOptions<FieldValue> & {
   // Name for the field errors from the backend like Melding.naam.
@@ -19,21 +17,16 @@ export interface JarbFieldOptions<FieldValue>
 export default function useJarbField<FieldValue>(
   options: JarbFieldOptions<FieldValue>
 ) {
-  const { name, jarb } = options;
-  const validate = useMemo(() => {
-    return getEnhancedValidate<FieldValue>({
-      ...options
-    });
-  }, [options]);
-
+  const { name } = options;
+  const validate = useEnhancedValidate(options);
   const fieldProps = useField<FieldValue>(name, {
     ...options,
     validate
   });
+
   const onChange = fieldProps.input.onChange;
   fieldProps.input.onChange = (value: FieldValue) => {
     onChange(value);
-    clearErrorsForValidator(jarb.validator || '');
   };
   return fieldProps;
 }

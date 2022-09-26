@@ -14,9 +14,9 @@ interface Props {
 export default function QuestionBox(props: Props) {
   const { id, value, index, moveCard, remove } = props;
   const ref = useRef<HTMLDivElement>(null);
-  const [, drop] = useDrop({
+  const [, drop] = useDrop<BoxType>({
     accept: QuestionTypes.UPDATE_QUESTION,
-    hover(item: BoxType, monitor: DropTargetMonitor) {
+    hover(item, monitor: DropTargetMonitor) {
       if (!ref.current) {
         return;
       }
@@ -67,7 +67,8 @@ export default function QuestionBox(props: Props) {
   });
 
   const [{ opacity }, drag] = useDrag({
-    item: { type: QuestionTypes.UPDATE_QUESTION, id, index },
+    type: QuestionTypes.UPDATE_QUESTION,
+    item: { id, index },
     collect: (monitor: any) => ({
       opacity: monitor.isDragging() ? 0.4 : 1
     })

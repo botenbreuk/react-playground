@@ -1,6 +1,5 @@
-import { emptyPage, Page } from '@42.nl/spring-connect';
 import { useCallback, useEffect, useState } from 'react';
-import { mergePagesOrReset } from '../../utils/page';
+import { emptyPage, Page } from './spring-models';
 
 interface LoadPageOptions<T, P> {
   pageRequest: (pageNumber: number, queryParams: P) => Promise<Page<T>>;
@@ -62,4 +61,14 @@ export default function useLoadPage<T, P>(
   }, [loadPage, loadPageWithoutParams, queryParams, pageNumber]);
 
   return { loading, loadPage, pageItems };
+}
+
+export function mergePagesOrReset<T>(page1: Page<T>, page2: Page<T>): Page<T> {
+  // A new search was made so page 2 is the first page and should be the new base.
+  if (page2.number <= 1) {
+    return page2;
+  }
+
+  // the next page was loaded, so merge page content.
+  return { ...page2, content: [...page1.content, ...page2.content] };
 }
