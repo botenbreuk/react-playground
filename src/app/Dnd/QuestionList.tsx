@@ -1,4 +1,4 @@
-import React, { CSSProperties, useCallback } from 'react';
+import { CSSProperties, useCallback } from 'react';
 import { useDrop } from 'react-dnd';
 import QuestionBox from './QuestionBox';
 import { QuestionTypes } from './QuestionTypes';

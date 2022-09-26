@@ -1,6 +1,9 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import Routes from './app/Routes/Routes';
 
-ReactDOM.render(<Routes />, document.getElementById('root'));
+const container = document.getElementById('root');
+const root = createRoot(container!);
+
+root.render(<Routes />);

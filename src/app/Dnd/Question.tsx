@@ -1,4 +1,4 @@
-import React, { CSSProperties } from 'react';
+import { CSSProperties } from 'react';
 import { useDrag } from 'react-dnd';
 import { QuestionTypes } from './QuestionTypes';
 
@@ -14,10 +14,11 @@ const style: CSSProperties = {
 
 interface Props {
   name: string;
+  onClick: (type: string) => void;
 }
 
 export default function Question(props: Props) {
-  const { name } = props;
+  const { name, onClick } = props;
   const [{ isDragging }, drag] = useDrag({
     type: QuestionTypes.NEW_QUESTION,
     item: { name },
@@ -28,7 +29,7 @@ export default function Question(props: Props) {
   const opacity = isDragging ? 0.4 : 1;
 
   return (
-    <div ref={drag} style={{ ...style, opacity }}>
+    <div ref={drag} style={{ ...style, opacity }} onClick={() => onClick(name)}>
       {name}
     </div>
   );

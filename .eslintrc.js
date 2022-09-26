@@ -23,6 +23,8 @@ module.exports = {
         ignoreRestSiblings: true // Allow destructuring while not consuming all variables
       }
     ],
+    'eslint-disable-next-line': ['off'],
+    '@typescript-eslint/no-non-null-assertion': ['off'],
     '@typescript-eslint/no-unused-expressions': ['error'],
     '@typescript-eslint/indent': ['off'],
     'react/jsx-curly-brace-presence': [1, 'never'],

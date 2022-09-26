@@ -1,82 +1,95 @@
-import { useState, useCallback } from 'react';
-import Card from './Card';
 import update from 'immutability-helper';
+import type { FC } from 'react';
+import { memo, useCallback, useState } from 'react';
+import { useDrop } from 'react-dnd';
+import { Card } from './Card';
+import { ItemTypes } from './ItemTypes';
 
 const style = {
   width: 400
 };
 
-export interface Item {
-  id: number;
-  text: string;
-}
-
 export interface ContainerState {
-  cards: Item[];
+  cards: any[];
 }
 
-export default function Container() {
-  const [cards, setCards] = useState([
-    {
-      id: 1,
-      text: 'Write a cool JS library'
-    },
-    {
-      id: 2,
-      text: 'Make it generic enough'
-    },
-    {
-      id: 3,
-      text: 'Write README'
-    },
-    {
-      id: 4,
-      text: 'Create some examples'
-    },
-    {
-      id: 5,
-      text: 'Spam in Twitter and IRC to promote it (note that this element is taller than the others)'
-    },
-    {
-      id: 6,
-      text: '???'
-    },
-    {
-      id: 7,
-      text: 'PROFIT'
-    }
-  ]);
+const ITEMS = [
+  {
+    id: 1,
+    text: 'Write a cool JS library'
+  },
+  {
+    id: 2,
+    text: 'Make it generic enough'
+  },
+  {
+    id: 3,
+    text: 'Write README'
+  },
+  {
+    id: 4,
+    text: 'Create some examples'
+  },
+  {
+    id: 5,
+    text: 'Spam in Twitter and IRC to promote it'
+  },
+  {
+    id: 6,
+    text: '???'
+  },
+  {
+    id: 7,
+    text: 'PROFIT'
+  }
+];
 
-  const moveCard = useCallback(
-    (dragIndex: number, hoverIndex: number) => {
-      const dragCard = cards[dragIndex];
-      setCards(
-        update(cards, {
-          $splice: [
-            [dragIndex, 1],
-            [hoverIndex, 0, dragCard]
-          ]
-        })
-      );
+export const Container: FC = memo(function Container() {
+  const [cards, setCards] = useState(ITEMS);
+
+  const findCard = useCallback(
+    (id: string) => {
+      const card = cards.filter(c => `${c.id}` === id)[0] as {
+        id: number;
+        text: string;
+      };
+      return {
+        card,
+        index: cards.indexOf(card)
+      };
     },
     [cards]
   );
 
-  const renderCard = (card: { id: number; text: string }, index: number) => {
-    return (
-      <Card
-        key={card.id}
-        index={index}
-        id={card.id}
-        text={card.text}
-        moveCard={moveCard}
-      />
-    );
-  };
-
-  return (
-    <>
-      <div style={style}>{cards.map((card, i) => renderCard(card, i))}</div>
-    </>
+  const moveCard = useCallback(
+    (id: string, atIndex: number) => {
+      const { card, index } = findCard(id);
+      setCards(
+        update(cards, {
+          $splice: [
+            [index, 1],
+            [atIndex, 0, card]
+          ]
+        })
+      );
+    },
+    [findCard, cards, setCards]
   );
-}
+
+  const [, drop] = useDrop(() => ({ accept: ItemTypes.CARD }));
+  return (
+    <div ref={drop} style={style}>
+      {cards.map(card => (
+        <Card
+          key={card.id}
+          id={`${card.id}`}
+          text={card.text}
+          moveCard={moveCard}
+          findCard={findCard}
+        />
+      ))}
+    </div>
+  );
+});
+
+export default Container;
