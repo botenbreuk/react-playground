@@ -1,3 +1,5 @@
-export { default as Page } from './Page/Page';
+export { default as Icon } from './Icon/Icon';
+export { default as MenuLeft } from './Menu/MenuLeft';
+export { default as MenuRight } from './Menu/MenuRight';
 export { default as ConfirmModal } from './Modal/ConfirmModal';
-export { default as Menu } from './Menu/Menu';
+export { default as Page } from './Page/Page';

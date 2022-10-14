@@ -1,7 +1,6 @@
 import { Alert, Button } from 'reactstrap';
-import logo from '../../styles/logo.svg';
 import { ConfirmModal, Page } from '../../ui';
-import './_app.css';
+import Logo from '../../ui/Logo/Logo';
 
 export default function App() {
   return (
@@ -22,9 +21,9 @@ export default function App() {
         </p>
       </div>
       <div id="main">
-        <div className="content">
-          <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
+        <div>
+          <header className="app-header">
+            <Logo className="app-logo" />
             <p>
               Edit <code>src/App.tsx</code> and save to reload.
             </p>

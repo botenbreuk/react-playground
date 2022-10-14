@@ -5,15 +5,13 @@ import { QuestionTypes } from './QuestionTypes';
 
 const style: CSSProperties = {
   minHeight: '12rem',
-  width: '12rem',
-  marginRight: '1.5rem',
-  marginBottom: '1.5rem',
+  margin: '1rem',
   color: 'white',
   padding: '1rem',
   textAlign: 'center',
   fontSize: '1rem',
   lineHeight: 'normal',
-  float: 'left'
+  backgroundColor: '#572180'
 };
 
 export interface BoxType {
@@ -64,10 +62,9 @@ export default function QuestionList(props: Props) {
   }
 
   const isActive = canDrop && isOver;
-  const backgroundColor = '#222';
 
   return (
-    <div ref={drop} style={{ ...style, backgroundColor }}>
+    <div ref={drop} style={{ ...style }}>
       {isActive ? 'Release to drop' : 'Drag a box here'}
       {value.map((val, index) => (
         <QuestionBox

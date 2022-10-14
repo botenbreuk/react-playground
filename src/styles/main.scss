@@ -1,0 +1,10 @@
+@import './variables';
+@import '~bootstrap/scss/bootstrap';
+@import '~bootstrap-icons/font/bootstrap-icons';
+
+@import '../app/App/app';
+@import '../app/Cards/cards';
+
+@import '../ui/Menu/menu-left';
+@import '../ui/Menu/menu-right';
+@import '../ui/Page/page';

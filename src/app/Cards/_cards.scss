@@ -1,0 +1,10 @@
+.card {
+  position: static;
+  border-radius: 0;
+  .card-body {
+    flex: 0 1 120px;
+  }
+  .card-footer:empty {
+    flex: 0 1 40px;
+  }
+}

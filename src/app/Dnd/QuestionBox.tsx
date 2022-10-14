@@ -1,7 +1,8 @@
-import React, { CSSProperties, useRef } from 'react';
+import { CSSProperties, useRef } from 'react';
+import { DropTargetMonitor, useDrag, useDrop, XYCoord } from 'react-dnd';
+import { Button, Col, Row } from 'reactstrap';
 import { BoxType } from './QuestionList';
 import { QuestionTypes } from './QuestionTypes';
-import { DropTargetMonitor, useDrop, XYCoord, useDrag } from 'react-dnd';
 
 interface Props {
   id: any;
@@ -84,14 +85,11 @@ export default function QuestionBox(props: Props) {
       backgroundColor = 'yellow';
       break;
     case 'Paper':
-      backgroundColor = 'white';
+      backgroundColor = 'lightgrey';
       break;
   }
 
   const style: CSSProperties = {
-    border: '1px dashed gray',
-    padding: '0.5rem 1rem',
-    marginBottom: '.5rem',
     backgroundColor,
     cursor: 'move',
     color: 'black',
@@ -99,10 +97,20 @@ export default function QuestionBox(props: Props) {
   };
 
   return (
-    <div ref={ref} style={{ ...style }}>
-      {index} - {value.name}
-      <input style={{ width: '100%' }} />
-      <button onClick={() => remove(index)}>verwijder</button>
+    <div ref={ref} style={{ ...style }} className="shadow-sm p-3 mb-2 rounded ">
+      <Row style={{ justifyContent: 'center', alignItems: 'center' }}>
+        <Col xs={12} md={2} className="text-start">
+          {index} - {value.name}
+        </Col>
+        <Col xs={12} md={8}>
+          <input style={{ width: '100%' }} />
+        </Col>
+        <Col xs={12} md={2}>
+          <Button color="danger" block onClick={() => remove(index)}>
+            verwijder
+          </Button>
+        </Col>
+      </Row>
     </div>
   );
 }

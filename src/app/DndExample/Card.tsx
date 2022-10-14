@@ -65,7 +65,7 @@ export const Card: FC<CardProps> = memo(function Card({
 
   return (
     <div ref={node => drag(drop(node))} style={{ ...style, opacity }}>
-      {text}
+      {originalIndex} - {text}
     </div>
   );
 });
