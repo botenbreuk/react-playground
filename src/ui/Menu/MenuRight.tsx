@@ -13,23 +13,22 @@ export default function MenuRight() {
   }
 
   if (!isOpen) {
-    return (
-      <Button color="danger" onClick={toggle}>
-        <Icon type="people" size="1.2rem" color="#fff" />
-      </Button>
-    );
+    return <RenderOpenButton toggle={toggle} />;
   }
 
   return (
     <>
-      <Button color="danger" onClick={toggle}>
-        <Icon type="people" size="1.2rem" color="#fff" />
-      </Button>
+      <RenderOpenButton toggle={toggle} />
       <div ref={ref} className="menu-right">
         <Container fluid>
           <Row>
             <Col xs={12} className="d-flex justify-content-end">
-              <Icon type="x" size="2rem" color="#ffffff" onClick={toggle} />
+              <Icon
+                type="x"
+                className="close-button"
+                color="#ffffff"
+                onClick={toggle}
+              />
             </Col>
           </Row>
           <Row>
@@ -48,5 +47,17 @@ export default function MenuRight() {
         </Container>
       </div>
     </>
+  );
+}
+
+function RenderOpenButton({ toggle }: { toggle: () => void }) {
+  return (
+    <Button color="danger" onClick={toggle}>
+      <Icon
+        type="people-fill"
+        className="menu-right-open-button"
+        color="#fff"
+      />
+    </Button>
   );
 }

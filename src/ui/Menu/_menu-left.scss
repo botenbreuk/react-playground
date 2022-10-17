@@ -4,22 +4,24 @@
   height: 100%; /* Full-height: remove this if you want "auto" height */
   background-color: #111; /* Black */
   overflow-x: hidden; /* Disable horizontal scroll */
-}
 
-/* The navigation menu links */
-.menu-left a {
-  text-decoration: none;
-  color: #818181;
-  display: block;
+  & a {
+    text-decoration: none;
+    color: #818181;
+    display: block;
 
-  &.active {
-    border-radius: 0 0.5rem 0.5rem 0;
+    &.active {
+      border-radius: 0 0.5rem 0.5rem 0;
+    }
+
+    &:hover {
+      color: #f1f1f1;
+    }
   }
-}
 
-/* When you mouse over the navigation links, change their color */
-.menu-left a:hover {
-  color: #f1f1f1;
+  & .close-button {
+    font-size: 2rem;
+  }
 }
 
 /* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */

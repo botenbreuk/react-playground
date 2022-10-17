@@ -27,7 +27,12 @@ export default function MenuLeft(props: Props) {
               zIndex: '1000'
             }}
           >
-            <Icon type="x" size="2rem" color="#244e9b" onClick={toggle} />
+            <Icon
+              type="x"
+              className="close-button"
+              color="#244e9b"
+              onClick={toggle}
+            />
           </div>
 
           <Container fluid>
