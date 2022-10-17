@@ -1,6 +1,5 @@
 import classnames from 'classnames';
 import { IconType } from './icon-types';
-import './_icon.scss';
 
 type Props = {
   type: IconType;

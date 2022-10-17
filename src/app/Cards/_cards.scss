@@ -73,6 +73,16 @@
     .card-body {
       flex: 0 1 120px;
     }
+
+    .card-progress {
+      margin: 0;
+      padding: 0;
+
+      & > * {
+        border-radius: 0;
+      }
+    }
+
     .card-footer {
       border-radius: 0;
 
@@ -113,7 +123,7 @@
           background-color: $gray-600;
 
           & .card-button {
-            border-left: 1px solid white;
+            border-left: 1px solid $gray-500;
           }
         }
       }
@@ -143,9 +153,13 @@
         width: 100%;
       }
 
+      & .card-progress {
+        display: none;
+      }
+
       & .card-footer {
         width: 15%;
-        border-left: 1px solid rgb(166, 166, 166);
+        border-left: 1px solid #a6a6a6;
       }
     }
   }

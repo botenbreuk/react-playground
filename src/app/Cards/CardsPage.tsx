@@ -1,6 +1,13 @@
 import classNames from 'classnames';
 import { ReactNode, useState } from 'react';
-import { Button, Card, CardBody, CardFooter, CardHeader } from 'reactstrap';
+import {
+  Button,
+  Card,
+  CardBody,
+  CardFooter,
+  CardHeader,
+  Progress
+} from 'reactstrap';
 import { Icon, Page } from '../../ui';
 import { IconType } from '../../ui/Icon/icon-types';
 
@@ -97,6 +104,11 @@ export default function CardsPage() {
               )}
             </CardHeader>
             <CardBody>{body}</CardBody>
+            <div className="card-progress">
+              <Progress value={70} color="danger">
+                7/10
+              </Progress>
+            </div>
             <CardFooter>{footer}</CardFooter>
           </Card>
         ))}
