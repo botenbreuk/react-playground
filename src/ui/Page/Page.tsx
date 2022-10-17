@@ -33,7 +33,7 @@ export default function Page(props: Props) {
       <Row>
         <MenuLeft isOpen={isOpen} toggle={toggle} />
         <Col md={isOpen ? 10 : 12} className="min-vh-100 p-0 bg-dark">
-          <Navbar className="m-0 bg-light" style={{ position: 'sticky' }}>
+          <Navbar className="m-0 bg-light">
             {!isOpen && (
               <NavbarBrand>
                 <Row>
