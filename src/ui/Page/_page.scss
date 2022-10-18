@@ -1,13 +1,13 @@
 .title {
   background: #637d82;
-  color: #ffffff;
+  color: #fff;
   width: 100%;
   padding: 20px;
   margin-bottom: 10px;
 }
 
 .navbar {
-  @extend .border;
+  border-bottom: $gray-300 1px solid;
   position: sticky;
   top: 0;
   z-index: 500;

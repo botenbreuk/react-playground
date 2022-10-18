@@ -1,131 +1,149 @@
+%card-icon {
+  background-color: $primary;
+  display: inline-flex;
+  justify-content: center;
+  padding: 0 0.8rem;
+  align-items: center;
+  height: 100%;
+
+  & > i {
+    font-size: 1rem !important;
+  }
+
+  & svg {
+    display: block;
+  }
+
+  &.red {
+    background-color: $red;
+  }
+
+  &.orange {
+    background-color: $orange;
+  }
+
+  &.yellow {
+    background-color: $yellow;
+  }
+}
+
+.card {
+  position: static;
+  border-radius: 0;
+  font-size: $font-size-base;
+
+  .card-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    height: 2.4rem;
+
+    & .card-icon {
+      @extend %card-icon;
+    }
+
+    & .card-title {
+      flex-grow: 2;
+      margin: 0;
+      padding: 0 1rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    & .card-button {
+      background-color: transparent;
+      @extend %card-icon;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
+  &.card {
+    background-color: transparent;
+
+    & .card-header {
+      color: $white;
+      border-radius: 0;
+      border-bottom: $border-width $border-style $border-color;
+    }
+
+    & .card-body {
+      background-color: $light;
+    }
+
+    & .card-footer {
+      background-color: $light;
+    }
+
+    &-info {
+      & .card-header {
+        background-color: $info;
+      }
+    }
+
+    &-danger {
+      & .card-header {
+        background-color: $danger;
+      }
+    }
+
+    &-light {
+      & .card-header {
+        background-color: $gray-600;
+      }
+
+      & .card-button {
+        border-left: 1px solid $gray-500;
+      }
+    }
+  }
+
+  & .card-progress {
+    margin: 0;
+    padding: 0;
+
+    & > * {
+      border-radius: 0;
+    }
+  }
+}
+
 .card-columns {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-auto-rows: auto;
-  grid-gap: 1rem;
+  grid-gap: 0.6rem;
+  grid-auto-flow: dense;
 
   @include media-breakpoint-down(lg) {
     grid-template-columns: repeat(1, 1fr);
   }
 
   .card {
-    position: static;
-    border-radius: 0;
-    font-size: $font-size-base;
+    display: flex;
+    flex-direction: column;
 
-    .card-header {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0;
-      margin: 0;
-      height: 2.4rem;
-
-      & .card-icon {
-        background-color: $primary;
-        display: inline-flex;
-        justify-content: center;
-        padding: 0 0.8rem;
-        align-items: center;
-        height: 100%;
-
-        & > i {
-          font-size: 1rem !important;
-        }
-
-        & svg {
-          display: block;
-        }
-
-        &.red {
-          background-color: $red;
-        }
-
-        &.orange {
-          background-color: $orange;
-        }
-
-        &.yellow {
-          background-color: $yellow;
-        }
-      }
-
-      & .card-title {
-        flex-grow: 2;
-        margin: 0;
-        padding: 0 1rem;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-
-      & .card-button {
-        background-color: transparent;
-        @extend .card-icon;
-
-        &:hover {
-          cursor: pointer;
-        }
-      }
-    }
-
-    .card-body {
+    & .card-body {
       flex: 0 1 120px;
     }
 
-    .card-progress {
-      margin: 0;
-      padding: 0;
-
-      & > * {
-        border-radius: 0;
-      }
-    }
-
-    .card-footer {
+    & .card-footer {
       border-radius: 0;
-
-      &:empty {
-        flex: 0 1 41px;
-      }
+      flex: 0 1 2.6rem;
     }
 
-    &.card {
-      @extend .bg-transparent;
-
-      & .card-header {
-        @extend .text-white, .rounded-0, .border-bottom;
-      }
+    &.big {
+      grid-column: 1 / -1;
+      scroll-margin-top: 4.2rem;
 
       & .card-body {
-        @extend .bg-light;
-      }
-
-      & .card-footer {
-        @extend .bg-light;
-      }
-
-      &-info {
-        & .card-header {
-          @extend .bg-info;
-        }
-      }
-
-      &-danger {
-        & .card-header {
-          @extend .bg-danger;
-        }
-      }
-
-      &-light {
-        & .card-header {
-          background-color: $gray-600;
-
-          & .card-button {
-            border-left: 1px solid $gray-500;
-          }
-        }
+        flex: 0 1 20rem;
       }
     }
   }
@@ -134,7 +152,7 @@
     grid-template-columns: repeat(1, 1fr);
     grid-gap: 0;
 
-    & .card {
+    & .card:not(.big) {
       justify-content: space-between;
       display: flex;
       flex-direction: row;

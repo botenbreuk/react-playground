@@ -6,7 +6,7 @@ export default function useScrollToRef() {
 
   useScrollTo({
     scrollTo: ref,
-    element: document.getElementsByClassName(`navbar-fixed-top`)[0],
+    element: document.getElementsByClassName(`navbar`)[0],
     margin: 10
   });
 
