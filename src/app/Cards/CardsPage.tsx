@@ -6,10 +6,14 @@ import {
   CardBody,
   CardFooter,
   CardHeader,
-  Progress
+  Col,
+  Progress,
+  Row
 } from 'reactstrap';
 import { Icon, Page } from '../../ui';
 import { IconType } from '../../ui/Icon/icon-types';
+import DescriptionList from '../../ui/List/DescriptionList';
+import DescriptionListItem from '../../ui/List/DescriptionListItem';
 
 type IconTypes = 'wrench' | 'lightning' | 'chain';
 type IconColor = 'red' | 'orange' | 'yellow';
@@ -204,12 +208,14 @@ export default function CardsPage() {
                   <Icon type={getIcon(icon)} color="white" />
                 </div>
                 <div
-                  className="card-title"
+                  className="card-title clickable"
                   onClick={() =>
-                    setBigCard(bigCard && bigCard === index ? undefined : index)
+                    setBigCard(bigCard === index ? undefined : index)
                   }
                 >
-                  {index + 1}: {title}
+                  <span>
+                    {index + 1}: {title}
+                  </span>
                 </div>
                 {(index + 1) % 2 === 0 && (
                   <div className="card-button">
@@ -221,6 +227,35 @@ export default function CardsPage() {
                 {body}
                 {bigCard === index && (
                   <>
+                    <Card className="card-light w-50 border border-3">
+                      <CardHeader>
+                        <div className="card-title">Hallo</div>
+                      </CardHeader>
+                      <CardBody>
+                        <Row>
+                          <Col xs={6}>
+                            <DescriptionList>
+                              <DescriptionListItem label="Username">
+                                User
+                              </DescriptionListItem>
+                              <DescriptionListItem label="Username">
+                                User
+                              </DescriptionListItem>
+                              <DescriptionListItem label="Username">
+                                User
+                              </DescriptionListItem>
+                            </DescriptionList>
+                          </Col>
+                          <Col xs={6}>
+                            <DescriptionList horizontal horizontalLeft>
+                              <DescriptionListItem label="Username">
+                                User
+                              </DescriptionListItem>
+                            </DescriptionList>
+                          </Col>
+                        </Row>
+                      </CardBody>
+                    </Card>
                     <p>
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                       In tellus metus, iaculis vel massa eu, feugiat tincidunt

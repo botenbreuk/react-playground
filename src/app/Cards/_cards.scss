@@ -32,7 +32,7 @@
   border-radius: 0;
   font-size: $font-size-base;
 
-  .card-header {
+  & > .card-header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -40,22 +40,35 @@
     padding: 0;
     margin: 0;
     height: 2.4rem;
+    cursor: default;
 
     & .card-icon {
       @extend %card-icon;
     }
 
     & .card-title {
-      flex-grow: 2;
-      margin: 0;
-      padding: 0 1rem;
-      white-space: nowrap;
+      display: inline-flex;
       overflow: hidden;
-      text-overflow: ellipsis;
+      align-items: center;
+      height: 100%;
+      width: 100%;
+      margin: 0;
+      padding: 0 0.6rem;
+
+      & span {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      &.clickable {
+        cursor: pointer;
+      }
     }
 
     & .card-button {
       background-color: transparent;
+      border-left: $border-width $border-style $border-color;
       @extend %card-icon;
 
       &:hover {
@@ -67,17 +80,17 @@
   &.card {
     background-color: transparent;
 
-    & .card-header {
+    & > .card-header {
       color: $white;
       border-radius: 0;
       border-bottom: $border-width $border-style $border-color;
     }
 
-    & .card-body {
+    & > .card-body {
       background-color: $light;
     }
 
-    & .card-footer {
+    & > .card-footer {
       background-color: $light;
     }
 
@@ -94,17 +107,17 @@
     }
 
     &-light {
-      & .card-header {
+      & > .card-header {
         background-color: $gray-600;
       }
 
-      & .card-button {
+      & > .card-button {
         border-left: 1px solid $gray-500;
       }
     }
   }
 
-  & .card-progress {
+  & > .card-progress {
     margin: 0;
     padding: 0;
 
@@ -125,15 +138,15 @@
     grid-template-columns: repeat(1, 1fr);
   }
 
-  .card {
+  & > .card {
     display: flex;
     flex-direction: column;
 
-    & .card-body {
+    & > .card-body {
       flex: 0 1 120px;
     }
 
-    & .card-footer {
+    & > .card-footer {
       border-radius: 0;
       flex: 0 1 2.6rem;
     }
@@ -142,7 +155,7 @@
       grid-column: 1 / -1;
       scroll-margin-top: 4.2rem;
 
-      & .card-body {
+      & > .card-body {
         flex: 0 1 20rem;
       }
     }
@@ -152,18 +165,18 @@
     grid-template-columns: repeat(1, 1fr);
     grid-gap: 0;
 
-    & .card:not(.big) {
+    & > .card:not(.big) {
       justify-content: space-between;
       display: flex;
       flex-direction: row;
 
-      & .card-header {
+      & > .card-header {
         width: 25%;
         height: 100%;
         border: 0 !important;
       }
 
-      & .card-body {
+      & > .card-body {
         flex-grow: 1;
         padding: 0;
         min-height: 4rem;
@@ -171,11 +184,11 @@
         width: 100%;
       }
 
-      & .card-progress {
+      & > .card-progress {
         display: none;
       }
 
-      & .card-footer {
+      & > .card-footer {
         width: 15%;
         border-left: 1px solid #a6a6a6;
       }

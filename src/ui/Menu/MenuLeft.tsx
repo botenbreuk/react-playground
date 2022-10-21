@@ -54,6 +54,11 @@ export default function MenuLeft(props: Props) {
                   </NavLink>
                 </NavItem>
                 <NavItem>
+                  <NavLink to="/cards/big" tag={RRNavLink} end>
+                    Card Big example
+                  </NavLink>
+                </NavItem>
+                <NavItem>
                   <NavLink to="/shuffle" tag={RRNavLink} end>
                     Shuffle
                   </NavLink>
