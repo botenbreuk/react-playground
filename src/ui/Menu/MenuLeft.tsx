@@ -45,7 +45,8 @@ export default function MenuLeft(props: Props) {
               <Nav vertical className="text-end" pills>
                 <NavItem>
                   <NavLink to="/" tag={RRNavLink} end>
-                    Home
+                    Home{' '}
+                    <span className="badge bg-danger rounded-pill">42</span>
                   </NavLink>
                 </NavItem>
                 <NavItem>

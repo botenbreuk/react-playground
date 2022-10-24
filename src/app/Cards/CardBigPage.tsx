@@ -1,5 +1,5 @@
-import { Card, CardBody, CardFooter, CardHeader } from 'reactstrap';
-import { Page } from '../../ui';
+import { Card, CardBody, CardFooter, CardHeader, Col, Row } from 'reactstrap';
+import { Icon, Page } from '../../ui';
 
 export default function CardBigPage() {
   return (
@@ -362,18 +362,60 @@ export default function CardBigPage() {
             </label>
           </div>
           <div className="mb-3">
-            <div className="input-group mb-3">
-              <span className="input-group-text" id="basic-addon1">
-                @
-              </span>
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Username"
-                aria-label="Username"
-                aria-describedby="basic-addon1"
-              />
-            </div>
+            <Row>
+              <Col xs={6}>
+                <div className="input-group mb-3">
+                  <span className="input-group-text" id="basic-addon1">
+                    <Icon type="person-fill" className="text-2" color="#777" />
+                  </span>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Username"
+                    aria-label="Username"
+                    aria-describedby="basic-addon1"
+                  />
+                </div>
+                <div className="input-group mb-3">
+                  <span className="input-group-text" id="basic-addon1">
+                    <Icon type="lock-fill" className="text-2" color="#777" />
+                  </span>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Password"
+                    aria-label="Password"
+                    aria-describedby="basic-addon1"
+                  />
+                </div>
+              </Col>
+              <Col xs={6}>
+                <div className="input-group mb-3">
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Username"
+                    aria-label="Username"
+                    aria-describedby="basic-addon1"
+                  />
+                  <span className="input-group-text" id="basic-addon1">
+                    <Icon type="person-fill" className="text-2" color="#777" />
+                  </span>
+                </div>
+                <div className="input-group mb-3">
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Password"
+                    aria-label="Password"
+                    aria-describedby="basic-addon1"
+                  />
+                  <span className="input-group-text" id="basic-addon1">
+                    <Icon type="lock-fill" className="text-2" color="#777" />
+                  </span>
+                </div>
+              </Col>
+            </Row>
 
             <div className="input-group mb-3">
               <input
@@ -436,6 +478,12 @@ export default function CardBigPage() {
                 aria-label="With textarea"
               ></textarea>
             </div>
+          </div>
+          <div className="mb-3">
+            <button type="button" className="btn btn-primary">
+              Notifications{' '}
+              <span className="badge bg-danger rounded-pill">300+</span>
+            </button>
           </div>
         </CardBody>
         <CardFooter className="text-primary">2022-01-01</CardFooter>
