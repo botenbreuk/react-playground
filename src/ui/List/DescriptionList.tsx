@@ -19,7 +19,7 @@ export default function DescriptionList(props: Props) {
   } = props;
 
   const classes = classNames(
-    'dl xs-mb-0',
+    'dl mb-0',
     {
       'dl-horizontal': horizontal,
       'dl-horizontal-left': horizontal && horizontalLeft

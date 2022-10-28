@@ -10,8 +10,7 @@ const style: CSSProperties = {
   padding: '1rem',
   textAlign: 'center',
   fontSize: '1rem',
-  lineHeight: 'normal',
-  backgroundColor: '#572180'
+  lineHeight: 'normal'
 };
 
 export interface BoxType {
@@ -64,7 +63,7 @@ export default function QuestionList(props: Props) {
   const isActive = canDrop && isOver;
 
   return (
-    <div ref={drop} style={{ ...style }}>
+    <div ref={drop} style={{ ...style }} className="bg-primary">
       {isActive ? 'Release to drop' : 'Drag a box here'}
       {value.map((val, index) => (
         <QuestionBox

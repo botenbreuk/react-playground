@@ -1,11 +1,11 @@
 import classNames from 'classnames';
 import { ReactNode, useEffect, useState } from 'react';
 import {
-  Button,
   Card,
   CardBody,
   CardFooter,
   CardHeader,
+  CardTitle,
   Col,
   Progress,
   Row
@@ -14,6 +14,8 @@ import { Icon, Page } from '../../ui';
 import { IconType } from '../../ui/Icon/icon-types';
 import DescriptionList from '../../ui/List/DescriptionList';
 import DescriptionListItem from '../../ui/List/DescriptionListItem';
+import CardButton from './parts/CardButton';
+import CardIcon from './parts/CardIcon';
 
 type IconTypes = 'wrench' | 'lightning' | 'chain';
 type IconColor = 'red' | 'orange' | 'yellow';
@@ -190,25 +192,25 @@ export default function CardsPage() {
   const names = classNames('card-columns', { horizontal: listMode });
 
   return (
-    <Page>
-      <Button
-        color="success"
-        className="mb-3"
-        block
-        onClick={() => setListMode(!listMode)}
-      >
-        Toggle to {listMode ? 'cards' : 'list'}
-      </Button>
+    <Page
+      filterBar={
+        <div className="d-flex flex-row-reverse p-1 px-3">
+          <Icon
+            type={listMode ? 'grid-3x3-gap-fill' : 'list'}
+            className="px-2 bg-primary text-white"
+            onClick={() => setListMode(!listMode)}
+          />
+        </div>
+      }
+    >
       <div className={names}>
         {cards.map(
           ({ title, body, footer, icon, iconColor, progress }, index) => (
             <Card className={`card-light ${bigCard === index ? 'big' : ''}`}>
               <CardHeader>
-                <div className={`card-icon ${iconColor}`}>
-                  <Icon type={getIcon(icon)} color="white" />
-                </div>
-                <div
-                  className="card-title clickable"
+                <CardIcon type={getIcon(icon)} bgColor={iconColor} />
+                <CardTitle
+                  className="clickable"
                   onClick={() =>
                     setBigCard(bigCard === index ? undefined : index)
                   }
@@ -216,11 +218,9 @@ export default function CardsPage() {
                   <span>
                     {index + 1}: {title}
                   </span>
-                </div>
+                </CardTitle>
                 {(index + 1) % 2 === 0 && (
-                  <div className="card-button">
-                    <Icon type="pencil-fill" color="white" />
-                  </div>
+                  <CardButton type="pencil-fill" color="white" />
                 )}
               </CardHeader>
               <CardBody>
@@ -229,7 +229,7 @@ export default function CardsPage() {
                   <>
                     <Card className="card-light w-50 border border-3">
                       <CardHeader>
-                        <div className="card-title">Hallo</div>
+                        <CardTitle>Hallo</CardTitle>
                       </CardHeader>
                       <CardBody>
                         <Row>

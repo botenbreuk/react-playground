@@ -16,8 +16,39 @@ export default function App() {
           It uses utility classes for typography and spacing to space content
           out within the larger container.
         </p>
-        <p className="lead">
+        <p
+          className="lead"
+          style={{ display: 'flex', justifyContent: 'center', gap: '10px' }}
+        >
           <Button color="primary">Learn More</Button>
+          <Button color="secondary">Learn More</Button>
+          <Button color="danger">Learn More</Button>
+          <Button color="success">Learn More</Button>
+          <Button color="warning">Learn More</Button>
+          <Button color="info">Learn More</Button>
+        </p>
+        <p
+          className="lead"
+          style={{ display: 'flex', justifyContent: 'center', gap: '10px' }}
+        >
+          <Button color="primary" outline>
+            Learn More
+          </Button>
+          <Button color="secondary" outline>
+            Learn More
+          </Button>
+          <Button color="danger" outline>
+            Learn More
+          </Button>
+          <Button color="success" outline>
+            Learn More
+          </Button>
+          <Button color="warning" outline>
+            Learn More
+          </Button>
+          <Button color="info" outline>
+            Learn More
+          </Button>
         </p>
       </div>
       <div id="main">

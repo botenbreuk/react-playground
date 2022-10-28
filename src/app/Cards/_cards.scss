@@ -44,6 +44,9 @@
 
     & .card-icon {
       @extend %card-icon;
+      & > i {
+        color: $white !important;
+      }
     }
 
     & .card-title {
@@ -77,6 +80,17 @@
     }
   }
 
+  & .card-footer {
+    & .card-icon {
+      @extend %card-icon;
+      background-color: transparent !important;
+
+      & > i {
+        color: $black !important;
+      }
+    }
+  }
+
   &.card {
     background-color: transparent;
 
@@ -94,15 +108,20 @@
       background-color: $light;
     }
 
-    &-info {
+    &-lighter {
       & .card-header {
-        background-color: $info;
+        background-color: $white;
+        color: $black;
+
+        & .card-button i {
+          color: $black !important;
+        }
       }
     }
 
-    &-danger {
+    &-dark {
       & .card-header {
-        background-color: $danger;
+        background-color: $gray-700;
       }
     }
 
@@ -153,7 +172,7 @@
 
     &.big {
       grid-column: 1 / -1;
-      scroll-margin-top: 4.2rem;
+      scroll-margin-top: 8rem;
 
       & > .card-body {
         flex: 0 1 20rem;
