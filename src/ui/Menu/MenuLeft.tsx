@@ -1,5 +1,5 @@
 import { NavLink as RRNavLink } from 'react-router-dom';
-import { Col, Container, Nav, NavItem, NavLink, Row } from 'reactstrap';
+import { Button, Col, Container, Nav, NavItem, NavLink, Row } from 'reactstrap';
 import { Icon } from '../index';
 import Logo from '../Logo/Logo';
 
@@ -69,6 +69,16 @@ export default function MenuLeft(props: Props) {
               </NavLink>
             </NavItem>
           </Nav>
+        </Row>
+        <Row>
+          <div className="footer">
+            <Button color="link" className="text-white p-0">
+              About
+            </Button>
+            <Button color="link" className="text-white p-0">
+              Contact
+            </Button>
+          </div>
         </Row>
       </Container>
     </Col>

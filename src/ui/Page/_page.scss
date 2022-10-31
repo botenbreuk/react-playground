@@ -13,11 +13,23 @@
   z-index: 500;
 }
 
-.footer {
+i.scroll-to-top {
+  margin: 0;
+  padding: 0;
+  position: fixed;
+  bottom: 0.8rem;
+  right: 1.2rem;
+  background-color: white;
+  color: $primary !important;
+  line-height: 0;
+  padding: 0.2rem;
+  border-radius: 2rem;
+  font-size: 2rem;
+  border: 2px $primary solid;
+}
+
+.filter-bar {
   display: flex;
-  position: sticky;
-  bottom: 0;
-  right: 0;
   background-color: #111;
   color: $white;
   padding: 0.5rem 1rem;
@@ -25,8 +37,13 @@
   cursor: default;
 
   & * {
+    flex-flow: wrap;
     display: inline-flex;
-    align-items: center;
-    gap: 1.5rem;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .left {
+    width: 80%;
   }
 }

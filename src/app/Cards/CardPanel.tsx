@@ -57,11 +57,11 @@ export default function CardPanel(props: Props) {
       return 'lightning-fill';
     }
 
-    if (icon === 'chain') {
+    if (icon === 'wrench') {
       return 'wrench-adjustable';
     }
 
-    if (icon === 'fire') {
+    if (icon === 'chain') {
       return 'fire';
     }
 

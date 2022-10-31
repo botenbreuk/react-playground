@@ -1,7 +1,6 @@
 import { ReactNode, useState } from 'react';
 import { NavLink as RRNavLink } from 'react-router-dom';
 import {
-  Button,
   Col,
   Container,
   Nav,
@@ -19,10 +18,11 @@ interface Props {
   title?: string;
   filterBar?: ReactNode;
   children?: ReactNode | ReactNode[];
+  scrollToTop?: boolean;
 }
 
 export default function Page(props: Props) {
-  const { title, filterBar, children } = props;
+  const { title, filterBar, children, scrollToTop = false } = props;
 
   const [isOpen, setIsOpen] = useState(true);
 
@@ -55,12 +55,12 @@ export default function Page(props: Props) {
                   <Logo height={40} />
                 </NavItem>
                 <NavItem>
-                  <NavLink to="/user/1" tag={RRNavLink}>
+                  <NavLink to="#" tag={RRNavLink}>
                     Username
                   </NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink to="/company/1" tag={RRNavLink}>
+                  <NavLink to="#" tag={RRNavLink}>
                     Logged in company name
                   </NavLink>
                 </NavItem>
@@ -69,24 +69,17 @@ export default function Page(props: Props) {
                 </NavItem>
               </Nav>
             </Navbar>
-            <div className="bg-light">{filterBar}</div>
+            <div className="filter-bar bg-light">{filterBar}</div>
           </div>
           <Row className="m-3">{children}</Row>
-          <div className="footer">
-            <div className="left">
-              <Button color="link" className="text-white p-0">
-                Hello
-              </Button>
-              <span>World!!</span>
-            </div>
-            <div className="right">
-              <Icon
-                type="arrow-up-square-fill"
-                color="white"
-                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              />
-            </div>
-          </div>
+          {scrollToTop && (
+            <Icon
+              className="scroll-to-top"
+              type="arrow-up-circle-fill"
+              color="white"
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            />
+          )}
         </Col>
       </Row>
     </Container>

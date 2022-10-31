@@ -43,7 +43,9 @@
     cursor: default;
 
     & .card-icon {
+      border-right: $border-width $border-style $border-color;
       @extend %card-icon;
+
       & > i {
         color: $white !important;
       }

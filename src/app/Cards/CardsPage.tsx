@@ -1,12 +1,13 @@
 import classNames from 'classnames';
-import { ReactNode, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import { Card, CardBody, CardHeader, CardTitle, Col, Row } from 'reactstrap';
 import { Icon, Page } from '../../ui';
 import DescriptionList from '../../ui/List/DescriptionList';
 import DescriptionListItem from '../../ui/List/DescriptionListItem';
 import CardPanel from './CardPanel';
+import { generateList } from './utils';
 
-type IconColor =
+export type IconColor =
   | 'bg-primary'
   | 'bg-secondary'
   | 'bg-danger'
@@ -14,9 +15,9 @@ type IconColor =
   | 'bg-info'
   | 'bg-orange'
   | 'bg-success';
-type IconTypes = 'wrench' | 'lightning' | 'chain';
+export type IconTypes = 'wrench' | 'lightning' | 'chain';
 
-type CardObj = {
+export type CardObj = {
   title: string;
   icon: IconTypes;
   iconColor: IconColor;
@@ -26,146 +27,32 @@ type CardObj = {
   buttonClick?: () => void;
 };
 
-const cards: CardObj[] = [
-  {
-    title: 'Item 1',
-    icon: 'wrench',
-    iconColor: 'bg-orange',
-    body: 'Body text'
-  },
-  {
-    title: 'Item 1',
-    icon: 'lightning',
-    iconColor: 'bg-danger',
-    body: 'Body text'
-  },
-  {
-    title: 'Item 1',
-    icon: 'chain',
-    iconColor: 'bg-warning',
-    body: 'Body text'
-  },
-  {
-    title: 'Item title',
-    icon: 'lightning',
-    iconColor: 'bg-danger',
-    body: 'Body text',
-    footer: 'footer text',
-    progress: 40
-  },
-  {
-    title: 'Item title',
-    icon: 'chain',
-    iconColor: 'bg-danger',
-    body: 'Body text',
-    footer: 'footer text'
-  },
-  {
-    title: 'Item 4 with a very long text so this will turn into a ellipsis',
-    icon: 'lightning',
-    iconColor: 'bg-orange',
-    body: 'Body text',
-    footer: 'footer text'
-  },
-  {
-    title: 'Item 4 with a very long text so this will turn into a ellipsis',
-    icon: 'wrench',
-    iconColor: 'bg-warning',
-    body: 'Body text',
-    footer: 'footer text',
-    progress: 20
-  },
-  {
-    title: 'Bigger item title but not ot big',
-    icon: 'lightning',
-    iconColor: 'bg-warning',
-    body: 'Body text',
-    footer: 'footer text'
-  },
-  {
-    title: 'Item 4 with a very long text so this will turn into a ellipsis',
-    icon: 'wrench',
-    iconColor: 'bg-orange',
-    body: 'Body text',
-    footer: 'footer text',
-    progress: 75
-  },
-  {
-    title: 'Item 4 with a very long text so this will turn into a ellipsis',
-    icon: 'chain',
-    iconColor: 'bg-danger',
-    body: 'Body text',
-    footer: 'footer text',
-    progress: 100
-  },
-  {
-    title: 'Item 4 with a very long text so this will turn into a ellipsis',
-    icon: 'lightning',
-    iconColor: 'bg-danger',
-    body: 'Body text',
-    footer: 'footer text'
-  },
-  {
-    title: 'Item 4 with a very long text so this will turn into a ellipsis',
-    icon: 'lightning',
-    iconColor: 'bg-orange',
-    body: 'Body text',
-    footer: 'footer text'
-  },
-  {
-    title: 'Item 4 with a very long text so this will turn into a ellipsis',
-    icon: 'lightning',
-    iconColor: 'bg-orange',
-    body: 'Body text',
-    footer: 'footer text'
-  },
-  {
-    title: 'Item 4 with a very long text so this will turn into a ellipsis',
-    icon: 'wrench',
-    iconColor: 'bg-danger',
-    body: 'Body text',
-    footer: 'footer text',
-    buttonClick: () => console.log('Hallow')
-  },
-  {
-    title: 'Item 4 with a very long text so this will turn into a ellipsis',
-    icon: 'lightning',
-    iconColor: 'bg-orange',
-    body: 'Body text',
-    footer: 'footer text'
-  },
-  {
-    title: 'Item 4 with a very long text so this will turn into a ellipsis',
-    icon: 'lightning',
-    iconColor: 'bg-orange',
-    body: 'Body text',
-    footer: 'footer text'
-  },
-  {
-    title: 'Item 1',
-    icon: 'wrench',
-    iconColor: 'bg-warning',
-    body: 'Body text'
-  }
-];
-
 export default function CardsPage() {
   const [listMode, setListMode] = useState(false);
   const [bigCard, setBigCard] = useState<number>();
+  const [cards, setCards] = useState<CardObj[]>([]);
+
+  useEffect(() => {
+    setCards(generateList(50));
+  }, []);
 
   const names = classNames('card-columns', { horizontal: listMode });
 
   return (
     <Page
       filterBar={
-        <div className="d-flex flex-row-reverse p-1 px-3">
-          <Icon
-            type={listMode ? 'grid-3x3-gap-fill' : 'list'}
-            className="px-2 bg-primary text-white"
-            onClick={() => setListMode(!listMode)}
-          />
-        </div>
+        <>
+          <div className="left"></div>
+          <div className="right">
+            <Icon
+              type={listMode ? 'grid-3x3-gap-fill' : 'list'}
+              className="p-2 bg-primary text-white"
+              onClick={() => setListMode(!listMode)}
+            />
+          </div>
+        </>
       }
+      scrollToTop
     >
       <div className={names}>
         {cards.map(
@@ -174,17 +61,14 @@ export default function CardsPage() {
             index
           ) => (
             <CardPanel
-              title={`${index + 1}: ${title}`}
+              key={index}
+              title={title}
               footer={footer}
               icon={icon}
               iconBg={iconColor}
-              progress={
-                progress
-                  ? { current: progress, max: 100 }
-                  : { current: 0, max: 100 }
-              }
+              progress={{ current: progress || 0, max: 100 }}
               headerClick={() =>
-                setBigCard(bigCard === index ? undefined : index)
+                setBigCard(bigCard !== index ? index : undefined)
               }
               editClick={buttonClick}
               bigView={bigCard === index}
