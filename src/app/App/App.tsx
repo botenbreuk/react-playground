@@ -18,7 +18,7 @@ export default function App() {
         </p>
         <p
           className="lead"
-          style={{ display: 'flex', justifyContent: 'center', gap: '10px' }}
+          style={{ display: 'flex', justifyContent: 'center', gap: '0.8rem' }}
         >
           <Button color="primary">Learn More</Button>
           <Button color="secondary">Learn More</Button>
@@ -29,7 +29,7 @@ export default function App() {
         </p>
         <p
           className="lead"
-          style={{ display: 'flex', justifyContent: 'center', gap: '10px' }}
+          style={{ display: 'flex', justifyContent: 'center', gap: '0.8rem' }}
         >
           <Button color="primary" outline>
             Learn More

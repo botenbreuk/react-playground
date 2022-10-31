@@ -1,6 +1,7 @@
 import { ReactNode, useState } from 'react';
 import { NavLink as RRNavLink } from 'react-router-dom';
 import {
+  Button,
   Col,
   Container,
   Nav,
@@ -71,6 +72,21 @@ export default function Page(props: Props) {
             <div className="bg-light">{filterBar}</div>
           </div>
           <Row className="m-3">{children}</Row>
+          <div className="footer">
+            <div className="left">
+              <Button color="link" className="text-white p-0">
+                Hello
+              </Button>
+              <span>World!!</span>
+            </div>
+            <div className="right">
+              <Icon
+                type="arrow-up-square-fill"
+                color="white"
+                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              />
+            </div>
+          </div>
         </Col>
       </Row>
     </Container>

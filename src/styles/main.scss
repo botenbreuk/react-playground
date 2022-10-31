@@ -3,7 +3,7 @@
 @import '~bootstrap-icons/font/bootstrap-icons';
 
 @import '../app/App/app';
-@import '../app/Cards/cards';
+@import '../app/Cards/styles/cards';
 
 @import '../ui/Menu/menu-left';
 @import '../ui/Menu/menu-right';
@@ -14,4 +14,8 @@
 
 .bg-orange {
   background-color: $orange !important;
+}
+
+.clickable {
+  cursor: pointer;
 }

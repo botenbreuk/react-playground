@@ -16,22 +16,13 @@ export default function MenuLeft(props: Props) {
   }
 
   return (
-    <Col md={2} className="p-0 menu-left min-vh-100">
-      <div
-        style={{
-          position: 'absolute',
-          top: 0,
-          right: 10,
-          zIndex: '1000'
-        }}
-      >
-        <Icon
-          type="x"
-          className="close-button"
-          color="#244e9b"
-          onClick={toggle}
-        />
-      </div>
+    <Col md={2} className="menu-left">
+      <Icon
+        type="x"
+        className="close-button"
+        color="#244e9b"
+        onClick={toggle}
+      />
 
       <Container fluid>
         <Row className="bg-light">

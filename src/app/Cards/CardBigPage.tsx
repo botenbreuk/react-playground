@@ -328,7 +328,7 @@ export default function CardBigPage() {
             </label>
           </div>
         </div>
-        <div style={{ display: 'flex', gap: '10px' }}>
+        <div style={{ display: 'flex', gap: '0.8rem' }}>
           <div className="mb-3">
             <input
               type="checkbox"
@@ -358,7 +358,7 @@ export default function CardBigPage() {
               Checked
             </label>
           </div>
-          <div style={{ display: 'inline-flex', gap: '10px' }}>
+          <div style={{ display: 'inline-flex', gap: '0.8rem' }}>
             <div>
               <input
                 type="radio"
