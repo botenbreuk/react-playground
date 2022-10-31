@@ -1,24 +1,20 @@
 import classNames from 'classnames';
-import { ReactNode, useEffect, useState } from 'react';
-import {
-  Card,
-  CardBody,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-  Col,
-  Progress,
-  Row
-} from 'reactstrap';
+import { ReactNode, useState } from 'react';
+import { Card, CardBody, CardHeader, CardTitle, Col, Row } from 'reactstrap';
 import { Icon, Page } from '../../ui';
-import { IconType } from '../../ui/Icon/icon-types';
 import DescriptionList from '../../ui/List/DescriptionList';
 import DescriptionListItem from '../../ui/List/DescriptionListItem';
-import CardButton from './parts/CardButton';
-import CardIcon from './parts/CardIcon';
+import CardPanel from './CardPanel';
 
+type IconColor =
+  | 'bg-primary'
+  | 'bg-secondary'
+  | 'bg-danger'
+  | 'bg-warning'
+  | 'bg-info'
+  | 'bg-orange'
+  | 'bg-success';
 type IconTypes = 'wrench' | 'lightning' | 'chain';
-type IconColor = 'red' | 'orange' | 'yellow';
 
 type CardObj = {
   title: string;
@@ -27,31 +23,32 @@ type CardObj = {
   body: ReactNode;
   footer?: ReactNode;
   progress?: number;
+  buttonClick?: () => void;
 };
 
 const cards: CardObj[] = [
   {
     title: 'Item 1',
     icon: 'wrench',
-    iconColor: 'orange',
+    iconColor: 'bg-orange',
     body: 'Body text'
   },
   {
     title: 'Item 1',
     icon: 'lightning',
-    iconColor: 'red',
+    iconColor: 'bg-danger',
     body: 'Body text'
   },
   {
     title: 'Item 1',
     icon: 'chain',
-    iconColor: 'yellow',
+    iconColor: 'bg-warning',
     body: 'Body text'
   },
   {
     title: 'Item title',
     icon: 'lightning',
-    iconColor: 'red',
+    iconColor: 'bg-danger',
     body: 'Body text',
     footer: 'footer text',
     progress: 40
@@ -59,21 +56,21 @@ const cards: CardObj[] = [
   {
     title: 'Item title',
     icon: 'chain',
-    iconColor: 'red',
+    iconColor: 'bg-danger',
     body: 'Body text',
     footer: 'footer text'
   },
   {
     title: 'Item 4 with a very long text so this will turn into a ellipsis',
     icon: 'lightning',
-    iconColor: 'orange',
+    iconColor: 'bg-orange',
     body: 'Body text',
     footer: 'footer text'
   },
   {
     title: 'Item 4 with a very long text so this will turn into a ellipsis',
     icon: 'wrench',
-    iconColor: 'yellow',
+    iconColor: 'bg-warning',
     body: 'Body text',
     footer: 'footer text',
     progress: 20
@@ -81,14 +78,14 @@ const cards: CardObj[] = [
   {
     title: 'Bigger item title but not ot big',
     icon: 'lightning',
-    iconColor: 'yellow',
+    iconColor: 'bg-warning',
     body: 'Body text',
     footer: 'footer text'
   },
   {
     title: 'Item 4 with a very long text so this will turn into a ellipsis',
     icon: 'wrench',
-    iconColor: 'orange',
+    iconColor: 'bg-orange',
     body: 'Body text',
     footer: 'footer text',
     progress: 75
@@ -96,7 +93,7 @@ const cards: CardObj[] = [
   {
     title: 'Item 4 with a very long text so this will turn into a ellipsis',
     icon: 'chain',
-    iconColor: 'red',
+    iconColor: 'bg-danger',
     body: 'Body text',
     footer: 'footer text',
     progress: 100
@@ -104,49 +101,50 @@ const cards: CardObj[] = [
   {
     title: 'Item 4 with a very long text so this will turn into a ellipsis',
     icon: 'lightning',
-    iconColor: 'red',
+    iconColor: 'bg-danger',
     body: 'Body text',
     footer: 'footer text'
   },
   {
     title: 'Item 4 with a very long text so this will turn into a ellipsis',
     icon: 'lightning',
-    iconColor: 'orange',
+    iconColor: 'bg-orange',
     body: 'Body text',
     footer: 'footer text'
   },
   {
     title: 'Item 4 with a very long text so this will turn into a ellipsis',
     icon: 'lightning',
-    iconColor: 'orange',
+    iconColor: 'bg-orange',
     body: 'Body text',
     footer: 'footer text'
   },
   {
     title: 'Item 4 with a very long text so this will turn into a ellipsis',
     icon: 'wrench',
-    iconColor: 'red',
+    iconColor: 'bg-danger',
+    body: 'Body text',
+    footer: 'footer text',
+    buttonClick: () => console.log('Hallow')
+  },
+  {
+    title: 'Item 4 with a very long text so this will turn into a ellipsis',
+    icon: 'lightning',
+    iconColor: 'bg-orange',
     body: 'Body text',
     footer: 'footer text'
   },
   {
     title: 'Item 4 with a very long text so this will turn into a ellipsis',
     icon: 'lightning',
-    iconColor: 'orange',
-    body: 'Body text',
-    footer: 'footer text'
-  },
-  {
-    title: 'Item 4 with a very long text so this will turn into a ellipsis',
-    icon: 'lightning',
-    iconColor: 'orange',
+    iconColor: 'bg-orange',
     body: 'Body text',
     footer: 'footer text'
   },
   {
     title: 'Item 1',
     icon: 'wrench',
-    iconColor: 'yellow',
+    iconColor: 'bg-warning',
     body: 'Body text'
   }
 ];
@@ -154,40 +152,6 @@ const cards: CardObj[] = [
 export default function CardsPage() {
   const [listMode, setListMode] = useState(false);
   const [bigCard, setBigCard] = useState<number>();
-
-  useEffect(() => {
-    document.querySelector('.big')?.scrollIntoView({
-      behavior: 'smooth'
-    });
-  });
-
-  function getIcon(icon: IconTypes): IconType {
-    if (icon === 'lightning') {
-      return 'lightning-fill';
-    }
-
-    if (icon === 'chain') {
-      return 'wrench-adjustable';
-    }
-
-    return 'fire';
-  }
-
-  function getProgressColor(progress?: number) {
-    if (!progress) {
-      return '';
-    }
-
-    if (progress === 100) {
-      return 'success';
-    }
-
-    if (progress >= 50 && progress < 100) {
-      return 'warning';
-    }
-
-    return 'danger';
-  }
 
   const names = classNames('card-columns', { horizontal: listMode });
 
@@ -205,27 +169,30 @@ export default function CardsPage() {
     >
       <div className={names}>
         {cards.map(
-          ({ title, body, footer, icon, iconColor, progress }, index) => (
-            <Card className={`card-light ${bigCard === index ? 'big' : ''}`}>
-              <CardHeader>
-                <CardIcon type={getIcon(icon)} bgColor={iconColor} />
-                <CardTitle
-                  className="clickable"
-                  onClick={() =>
-                    setBigCard(bigCard === index ? undefined : index)
-                  }
-                >
-                  <span>
-                    {index + 1}: {title}
-                  </span>
-                </CardTitle>
-                {(index + 1) % 2 === 0 && (
-                  <CardButton type="pencil-fill" color="white" />
-                )}
-              </CardHeader>
-              <CardBody>
-                {body}
-                {bigCard === index && (
+          (
+            { title, body, footer, icon, iconColor, progress, buttonClick },
+            index
+          ) => (
+            <CardPanel
+              title={`${index + 1}: ${title}`}
+              footer={footer}
+              icon={icon}
+              iconBg={iconColor}
+              progress={
+                progress
+                  ? { current: progress, max: 100 }
+                  : { current: 0, max: 100 }
+              }
+              headerClick={() =>
+                setBigCard(bigCard === index ? undefined : index)
+              }
+              editClick={buttonClick}
+              bigView={bigCard === index}
+            >
+              {bigView =>
+                !bigView ? (
+                  body
+                ) : (
                   <>
                     <Card className="card-light w-50 border border-3">
                       <CardHeader>
@@ -324,15 +291,9 @@ export default function CardsPage() {
                       aliquam. Fusce blandit ultrices cursus.
                     </p>
                   </>
-                )}
-              </CardBody>
-              <div className="card-progress">
-                <Progress value={progress} color={getProgressColor(progress)}>
-                  {progress}/100
-                </Progress>
-              </div>
-              <CardFooter>{footer}</CardFooter>
-            </Card>
+                )
+              }
+            </CardPanel>
           )
         )}
       </div>

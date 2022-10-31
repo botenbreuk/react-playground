@@ -17,7 +17,7 @@ import Logo from '../Logo/Logo';
 interface Props {
   title?: string;
   filterBar?: ReactNode;
-  children?: ReactNode;
+  children?: ReactNode | ReactNode[];
 }
 
 export default function Page(props: Props) {

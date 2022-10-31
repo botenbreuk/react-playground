@@ -11,7 +11,7 @@ export default function ScrollTo(props: Props) {
   const { children } = props;
 
   return (
-    <div style={{ width: '100%' }} ref={setRef}>
+    <div style={{ width: '100%', gridColumn: '1 / -1' }} ref={setRef}>
       {children}
     </div>
   );
