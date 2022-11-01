@@ -34,7 +34,7 @@ export default function Page(props: Props) {
     <Container fluid>
       <Row>
         <MenuLeft isOpen={isOpen} toggle={toggle} />
-        <Col md={isOpen ? 10 : 12} className="min-vh-100 p-0 bg-dark">
+        <Col xs={isOpen ? 10 : 12} className="min-vh-100 p-0 bg-dark">
           <div className="navbars">
             <Navbar className="m-0 bg-light">
               {!isOpen && (
@@ -69,9 +69,11 @@ export default function Page(props: Props) {
                 </NavItem>
               </Nav>
             </Navbar>
-            <div className="filter-bar bg-light">{filterBar}</div>
+            {filterBar && (
+              <div className="filter-bar bg-light">{filterBar}</div>
+            )}
           </div>
-          <Row className="m-3">{children}</Row>
+          <div className="main-content">{children}</div>
           {scrollToTop && (
             <Icon
               className="scroll-to-top"

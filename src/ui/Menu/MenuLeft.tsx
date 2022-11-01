@@ -33,38 +33,38 @@ export default function MenuLeft(props: Props) {
         <Row className="mt-5">
           <Nav vertical className="text-end" pills>
             <NavItem>
-              <NavLink to="/" tag={RRNavLink} end>
+              <NavLink to="/" tag={RRNavLink} exact>
                 {'Home '}
                 <span className="badge bg-danger rounded-pill">42</span>
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink to="/cards" tag={RRNavLink} end>
+              <NavLink to="/cards" tag={RRNavLink} exact>
                 Cards example
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink to="/cards/big" tag={RRNavLink} end>
+              <NavLink to="/cards/big" tag={RRNavLink} exact>
                 Card Big example
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink to="/shuffle" tag={RRNavLink} end>
+              <NavLink to="/shuffle" tag={RRNavLink} exact>
                 Shuffle
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink to="/dnd" tag={RRNavLink} end>
+              <NavLink to="/dnd" tag={RRNavLink} exact>
                 Drag and Drop
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink to="/dnd-sort" tag={RRNavLink} end>
+              <NavLink to="/dnd-sort" tag={RRNavLink} exact>
                 Drag and Drop - sort
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink disabled to="disabled" tag={RRNavLink} end>
+              <NavLink disabled to="disabled" tag={RRNavLink} exact>
                 Disabled Link
               </NavLink>
             </NavItem>
