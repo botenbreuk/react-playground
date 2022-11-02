@@ -1,12 +1,11 @@
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { Button, Col, Container, Nav, NavItem, NavLink, Row } from 'reactstrap';
-import useOutsideClick from '../../hooks/useOutsideClick/useOutsideClick';
-import { Icon } from '../index';
+import useOutsideClick from '../../../hooks/useOutsideClick/useOutsideClick';
+import { Icon } from '../../index';
 
 export default function MenuRight() {
   const [isOpen, setIsOpen] = useState(false);
-  const ref = useRef<HTMLInputElement>(null);
-  useOutsideClick(ref, toggle);
+  const ref = useOutsideClick(toggle);
 
   function toggle() {
     setIsOpen(!isOpen);
@@ -34,13 +33,13 @@ export default function MenuRight() {
           <Row>
             <Nav vertical className="text-center" pills>
               <NavItem>
-                <NavLink to="#">Change Password</NavLink>
+                <NavLink href="#">Change Password</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink to="#">Settings</NavLink>
+                <NavLink href="#">Settings</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink to="#">Logout</NavLink>
+                <NavLink href="#">Logout</NavLink>
               </NavItem>
             </Nav>
           </Row>

@@ -1,6 +1,8 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
-const useOutsideClick = (ref: any, callback: any) => {
+export default function useOutsideClick(callback: (event: Event) => void) {
+  const ref = useRef<any>(null);
+
   useEffect(() => {
     const listener = (event: Event) => {
       // Do nothing if clicking ref's element or descendent elements
@@ -19,6 +21,6 @@ const useOutsideClick = (ref: any, callback: any) => {
       document.removeEventListener('touchstart', listener);
     };
   }, [ref, callback]);
-};
 
-export default useOutsideClick;
+  return ref;
+}

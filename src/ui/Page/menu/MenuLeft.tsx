@@ -1,7 +1,7 @@
 import { NavLink as RRNavLink } from 'react-router-dom';
 import { Button, Col, Container, Nav, NavItem, NavLink, Row } from 'reactstrap';
-import { Icon } from '../index';
-import Logo from '../Logo/Logo';
+import { Icon } from '../../index';
+import Logo from '../../Logo/Logo';
 
 type Props = {
   isOpen: boolean;

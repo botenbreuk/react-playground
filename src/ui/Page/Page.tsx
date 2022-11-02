@@ -11,8 +11,10 @@ import {
   NavLink,
   Row
 } from 'reactstrap';
-import { Icon, MenuLeft, MenuRight } from '../index';
+import { Icon } from '../index';
 import Logo from '../Logo/Logo';
+import MenuLeft from './menu/MenuLeft';
+import MenuRight from './menu/MenuRight';
 
 interface Props {
   title?: string;
