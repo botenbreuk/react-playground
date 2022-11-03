@@ -1,6 +1,14 @@
 import classNames from 'classnames';
 import { ReactNode, useEffect, useState } from 'react';
-import { Card, CardBody, CardHeader, CardTitle, Col, Row } from 'reactstrap';
+import {
+  Button,
+  Card,
+  CardBody,
+  CardHeader,
+  CardTitle,
+  Col,
+  Row
+} from 'reactstrap';
 import { Icon, Page } from '../../ui';
 import DescriptionList from '../../ui/List/DescriptionList';
 import DescriptionListItem from '../../ui/List/DescriptionListItem';
@@ -25,6 +33,8 @@ export type CardObj = {
   footer?: ReactNode;
   progress?: number;
   buttonClick?: () => void;
+  customEdit?: boolean;
+  showTime?: boolean;
 };
 
 export default function CardsPage() {
@@ -57,7 +67,17 @@ export default function CardsPage() {
       <div className={names}>
         {cards.map(
           (
-            { title, body, footer, icon, iconColor, progress, buttonClick },
+            {
+              title,
+              body,
+              footer,
+              icon,
+              iconColor,
+              progress,
+              buttonClick,
+              customEdit,
+              showTime
+            },
             index
           ) => (
             <CardPanel
@@ -72,6 +92,14 @@ export default function CardsPage() {
               }
               editClick={buttonClick}
               bigView={bigCard === index}
+              customEdit={
+                customEdit && (
+                  <Button color="primary" className="rounded-0">
+                    Hello world
+                  </Button>
+                )
+              }
+              time={showTime ? 420 : undefined}
             >
               {bigView =>
                 !bigView ? (

@@ -28,7 +28,9 @@ export function generateList(total: number) {
       progress:
         getRandomInt(20) <= 5
           ? progesses[getRandomInt(progesses.length)]
-          : undefined
+          : undefined,
+      customEdit: getRandomInt(100) < 10,
+      showTime: getRandomInt(100) < 50
     });
   }
 

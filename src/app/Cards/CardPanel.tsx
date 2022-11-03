@@ -1,6 +1,5 @@
 import { ReactNode } from 'react';
 import {
-  Button,
   Card,
   CardBody,
   CardFooter,
@@ -28,6 +27,7 @@ type Props = {
   icon: IconTypes;
   iconBg?: IconBg;
   headerClick?: () => void;
+  customEdit?: ReactNode;
   editClick?: () => void;
   bigView?: boolean;
   className?: string;
@@ -37,6 +37,7 @@ type Props = {
     | ReactNode[];
   footer?: ReactNode | ReactNode[];
   progress?: { current: number; max: number; suffix?: string };
+  time?: number;
 };
 
 export default function CardPanel(props: Props) {
@@ -45,12 +46,14 @@ export default function CardPanel(props: Props) {
     icon,
     iconBg = 'bg-primary',
     headerClick,
+    customEdit,
     editClick,
     bigView = false,
     children,
     footer,
     className,
-    progress
+    progress,
+    time
   } = props;
 
   function getIcon(icon: IconTypes): IconType {
@@ -98,15 +101,15 @@ export default function CardPanel(props: Props) {
         >
           <span>{title}</span>
         </CardTitle>
-        <div className="duration">
-          <div className="time">5000</div>
-          <div className="time-type">dagen</div>
-        </div>
-        <div className="right-component">
-          <Button color="primary" className="rounded-0">
-            Hello world
-          </Button>
-        </div>
+        {time && (
+          <div className="duration">
+            <div className="time">{time}</div>
+            <div className="time-type">days</div>
+          </div>
+        )}
+
+        {customEdit && <div className="right-component">{customEdit}</div>}
+
         {editClick && (
           <CardButton type="pencil-fill" color="white" onClick={editClick} />
         )}
