@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 import {
+  Button,
   Card,
   CardBody,
   CardFooter,
@@ -97,6 +98,15 @@ export default function CardPanel(props: Props) {
         >
           <span>{title}</span>
         </CardTitle>
+        <div className="duration">
+          <div className="time">5000</div>
+          <div className="time-type">dagen</div>
+        </div>
+        <div className="right-component">
+          <Button color="primary" className="rounded-0">
+            Hello world
+          </Button>
+        </div>
         {editClick && (
           <CardButton type="pencil-fill" color="white" onClick={editClick} />
         )}

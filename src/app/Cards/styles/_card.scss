@@ -35,7 +35,6 @@
   & > .card-header {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
     align-items: center;
     padding: 0;
     margin: 0;
@@ -59,10 +58,46 @@
       width: 100%;
       margin: 0;
       padding: 0 0.6rem;
+      flex-grow: 2;
 
       & span {
         white-space: nowrap;
         overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+
+    & .duration {
+      display: inline-flex;
+      flex-flow: row wrap;
+      padding: 0 0.2rem;
+      margin: 0;
+      text-align: center;
+
+      & > .time {
+        padding-top: 0.5rem;
+        width: 100%;
+        line-height: 0.6rem;
+      }
+
+      & > .time-type {
+        width: 100%;
+        height: 20%;
+        font-size: 0.7rem;
+      }
+    }
+
+    & .right-component {
+      width: fit-content;
+      display: inline-flex;
+      justify-content: end;
+      flex-grow: 1;
+      flex-shrink: 0;
+
+      & > * {
+        height: fit-content;
+        border: 0;
+        margin: 0;
         text-overflow: ellipsis;
       }
     }
