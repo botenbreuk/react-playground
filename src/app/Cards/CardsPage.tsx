@@ -14,6 +14,7 @@ import { Icon, Page } from '../../ui';
 import DescriptionList from '../../ui/List/DescriptionList';
 import DescriptionListItem from '../../ui/List/DescriptionListItem';
 import CardPanel from './CardPanel';
+import CardIcon from './parts/CardIcon';
 import { generateList } from './utils';
 
 export type IconColor =
@@ -86,7 +87,10 @@ export default function CardsPage() {
             <CardPanel
               key={index}
               title={title}
-              footer={footer}
+              footer={[
+                footer ? <CardIcon type="check" color="green" /> : undefined,
+                <span className="text">{footer}</span>
+              ]}
               icon={icon}
               iconBg={iconColor}
               progress={{ current: progress || 0, max: 100 }}

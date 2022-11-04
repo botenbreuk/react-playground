@@ -26,11 +26,10 @@ export default function CardBigPage() {
       <CardPanel
         title="Form elements"
         icon="smartwatch"
-        footer={
-          <>
-            <CardIcon type="check" /> 2022-01-01
-          </>
-        }
+        footer={[
+          <CardIcon type="check" color="green" />,
+          <span className="text">2022-01-01</span>
+        ]}
       >
         <div className="mb-3">
           <label htmlFor="exampleFormControlInput1" className="form-label">
@@ -567,13 +566,13 @@ export default function CardBigPage() {
             </TabContent>
           </Col>
           <Col xs={12} lg={4}>
-            <Card className="card-wd mb-2">
+            <Card className="theme-wd mb-2">
               <CardHeader>
                 <CardIcon type="briefcase-fill" bgColor="red" />
                 <CardTitle>Hallo</CardTitle>
               </CardHeader>
             </Card>
-            <Card className="card-wd mb-2">
+            <Card className="theme-wd mb-2">
               <CardHeader>
                 <CardIcon type="briefcase-fill" bgColor="red" />
                 <CardTitle>Hallo</CardTitle>
@@ -624,7 +623,7 @@ function ToggleCard(props: {
   } = props;
   const [show, setShow] = useState(defaultOpen);
 
-  const names = classNames('card-wd', className);
+  const names = classNames('theme-wd', className);
 
   return (
     <Card className={names}>

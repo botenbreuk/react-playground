@@ -39,11 +39,11 @@
       justify-content: space-between;
       display: flex;
       flex-direction: row;
+      border-bottom: $border-width $border-style $gray-500;
 
       & > .card-header {
         width: 25%;
         height: 100%;
-        border: 0 !important;
       }
 
       & > .card-body {
@@ -60,6 +60,7 @@
 
       & > .card-footer {
         width: 15%;
+        height: 100%;
         border-left: 1px solid #a6a6a6;
       }
     }
