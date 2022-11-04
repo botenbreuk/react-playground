@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import { ReactNode, useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import {
   Button,
   Card,
@@ -41,6 +42,8 @@ export default function CardsPage() {
   const [listMode, setListMode] = useState(false);
   const [bigCard, setBigCard] = useState<number>();
   const [cards, setCards] = useState<CardObj[]>([]);
+
+  const history = useHistory();
 
   useEffect(() => {
     setCards(generateList(50));
@@ -90,7 +93,9 @@ export default function CardsPage() {
               headerClick={() =>
                 setBigCard(bigCard !== index ? index : undefined)
               }
-              editClick={buttonClick}
+              editClick={
+                buttonClick ? () => history.push('/cards/big') : undefined
+              }
               bigView={bigCard === index}
               customEdit={
                 customEdit && (
@@ -106,7 +111,7 @@ export default function CardsPage() {
                   body
                 ) : (
                   <>
-                    <Card className="card-light w-50 border border-3">
+                    <Card className="theme-wd w-50 border border-3">
                       <CardHeader>
                         <CardTitle>Hallo</CardTitle>
                       </CardHeader>

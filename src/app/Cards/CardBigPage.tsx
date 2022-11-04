@@ -531,13 +531,13 @@ export default function CardBigPage() {
                   Tab1
                 </NavLink>
               </NavItem>
-              <NavItem>
+              <NavItem className="bg-white">
                 <NavLink href="#">Tab2</NavLink>
               </NavItem>
-              <NavItem>
+              <NavItem className="bg-white">
                 <NavLink href="#">Tab3</NavLink>
               </NavItem>
-              <NavItem>
+              <NavItem className="bg-white">
                 <NavLink href="#">Tab4</NavLink>
               </NavItem>
             </Nav>
@@ -567,22 +567,18 @@ export default function CardBigPage() {
             </TabContent>
           </Col>
           <Col xs={12} lg={4}>
-            <Card className="card-dark mb-2">
+            <Card className="card-wd mb-2">
               <CardHeader>
-                <div className="card-icon red">
-                  <Icon type="briefcase-fill" />
-                </div>
-                <div className="card-title">Hallo</div>
+                <CardIcon type="briefcase-fill" bgColor="red" />
+                <CardTitle>Hallo</CardTitle>
               </CardHeader>
             </Card>
-            <Card className="card-lighter mb-2">
+            <Card className="card-wd mb-2">
               <CardHeader>
-                <div className="card-icon red">
-                  <Icon type="briefcase-fill" />
-                </div>
-                <div className="card-title">Hallo</div>
+                <CardIcon type="briefcase-fill" bgColor="red" />
+                <CardTitle>Hallo</CardTitle>
               </CardHeader>
-              <CardBody className="bg-secondary text-white">
+              <CardBody>
                 <DescriptionList horizontal horizontalLeft>
                   <DescriptionListItem label="Username">
                     User
@@ -628,7 +624,7 @@ function ToggleCard(props: {
   } = props;
   const [show, setShow] = useState(defaultOpen);
 
-  const names = classNames('card-lighter', className);
+  const names = classNames('card-wd', className);
 
   return (
     <Card className={names}>
@@ -642,9 +638,7 @@ function ToggleCard(props: {
           onClick={() => setShow(!show)}
         />
       </CardHeader>
-      {show && (
-        <CardBody className="bg-secondary text-white">{children}</CardBody>
-      )}
+      {show && <CardBody>{children}</CardBody>}
     </Card>
   );
 }

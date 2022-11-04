@@ -11,8 +11,8 @@ export default function CardButton(props: Props) {
   const { type, color, onClick } = props;
 
   return (
-    <div className="card-button">
-      <Icon type={type} color={color} onClick={onClick} />
+    <div className="card-button" onClick={onClick}>
+      <Icon type={type} color={color} />
     </div>
   );
 }

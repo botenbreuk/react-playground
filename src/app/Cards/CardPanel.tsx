@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { ReactNode } from 'react';
 import {
   Card,
@@ -38,6 +39,7 @@ type Props = {
   footer?: ReactNode | ReactNode[];
   progress?: { current: number; max: number; suffix?: string };
   time?: number;
+  theme?: 'lg' | 'dg' | 'lw' | 'dw' | 'wd';
 };
 
 export default function CardPanel(props: Props) {
@@ -53,7 +55,8 @@ export default function CardPanel(props: Props) {
     footer,
     className,
     progress,
-    time
+    time,
+    theme = 'lg'
   } = props;
 
   function getIcon(icon: IconTypes): IconType {
@@ -91,8 +94,10 @@ export default function CardPanel(props: Props) {
     return 'danger';
   }
 
+  const classes = classNames({ big: bigView }, className, `theme-${theme}`);
+
   const card = (
-    <Card className={`card-light ${bigView ? 'big' : ''} ${className}`}>
+    <Card className={classes}>
       <CardHeader>
         <CardIcon type={getIcon(icon)} bgColor={iconBg} />
         <CardTitle

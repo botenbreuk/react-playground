@@ -1,33 +1,9 @@
-%card-icon {
-  background-color: $primary;
-  display: inline-flex;
-  justify-content: center;
-  padding: 0 0.8rem;
-  align-items: center;
-  height: 100%;
-
-  & > i {
-    font-size: 1rem !important;
-  }
-
-  & svg {
-    display: block;
-  }
-
-  &.red {
-    background-color: $red;
-  }
-
-  &.orange {
-    background-color: $orange;
-  }
-
-  &.yellow {
-    background-color: $yellow;
-  }
-}
+@import './card-icons';
+@import './card-themes';
 
 .card {
+  @extend %card-themes;
+
   position: static;
   border-radius: 0;
   font-size: $font-size-base;
@@ -44,10 +20,6 @@
     & .card-icon {
       border-right: $border-width $border-style $border-color;
       @extend %card-icon;
-
-      & > i {
-        color: $white !important;
-      }
     }
 
     & .card-title {
@@ -90,13 +62,12 @@
     & .right-component {
       width: fit-content;
       display: inline-flex;
-      justify-content: end;
+      justify-content: flex-end;
       flex-grow: 1;
       flex-shrink: 0;
 
       & > * {
         height: fit-content;
-        border: 0;
         margin: 0;
         text-overflow: ellipsis;
       }
@@ -114,57 +85,15 @@
   }
 
   & .card-footer {
+    min-height: fit-content;
+    font-size: 0.9rem;
+
     & .card-icon {
       @extend %card-icon;
       background-color: transparent !important;
 
       & > i {
         color: $black !important;
-      }
-    }
-  }
-
-  &.card {
-    background-color: transparent;
-
-    & > .card-header {
-      color: $white;
-      border-radius: 0;
-      border-bottom: $border-width $border-style $border-color;
-    }
-
-    & > .card-body {
-      background-color: $light;
-    }
-
-    & > .card-footer {
-      background-color: $light;
-    }
-
-    &-lighter {
-      & .card-header {
-        background-color: $white;
-        color: $black;
-
-        & .card-button i {
-          color: $black !important;
-        }
-      }
-    }
-
-    &-dark {
-      & .card-header {
-        background-color: $gray-700;
-      }
-    }
-
-    &-light {
-      & > .card-header {
-        background-color: $gray-600;
-      }
-
-      & > .card-button {
-        border-left: 1px solid $gray-500;
       }
     }
   }
