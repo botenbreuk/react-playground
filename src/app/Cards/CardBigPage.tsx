@@ -25,9 +25,9 @@ export default function CardBigPage() {
     <Page>
       <CardPanel
         title="Form elements"
-        icon="smartwatch"
+        icon="bi-smartwatch"
         footer={[
-          <CardIcon type="check" color="green" />,
+          <CardIcon type="bi-check" color="green" />,
           <span className="text">2022-01-01</span>
         ]}
       >
@@ -396,7 +396,7 @@ export default function CardBigPage() {
             <Col xs={6}>
               <div className="input-group mb-3">
                 <span className="input-group-text" id="basic-addon1">
-                  <Icon type="person-fill" className="text-2" color="#777" />
+                  <Icon type="bi-person-fill" className="text-2" color="#777" />
                 </span>
                 <input
                   type="text"
@@ -408,7 +408,7 @@ export default function CardBigPage() {
               </div>
               <div className="input-group mb-3">
                 <span className="input-group-text" id="basic-addon1">
-                  <Icon type="lock-fill" className="text-2" color="#777" />
+                  <Icon type="bi-lock-fill" className="text-2" color="#777" />
                 </span>
                 <input
                   type="text"
@@ -429,7 +429,7 @@ export default function CardBigPage() {
                   aria-describedby="basic-addon1"
                 />
                 <span className="input-group-text" id="basic-addon1">
-                  <Icon type="person-fill" className="text-2" color="#777" />
+                  <Icon type="bi-person-fill" className="text-2" color="#777" />
                 </span>
               </div>
               <div className="input-group mb-3">
@@ -441,7 +441,7 @@ export default function CardBigPage() {
                   aria-describedby="basic-addon1"
                 />
                 <span className="input-group-text" id="basic-addon1">
-                  <Icon type="lock-fill" className="text-2" color="#777" />
+                  <Icon type="bi-lock-fill" className="text-2" color="#777" />
                 </span>
               </div>
             </Col>
@@ -519,7 +519,7 @@ export default function CardBigPage() {
       <CardPanel
         title="Card items"
         className="mt-3"
-        icon="aspect-ratio-fill"
+        icon="bi-aspect-ratio-fill"
         iconBg="bg-success"
       >
         <Row>
@@ -568,13 +568,13 @@ export default function CardBigPage() {
           <Col xs={12} lg={4}>
             <Card className="theme-wd mb-2">
               <CardHeader>
-                <CardIcon type="briefcase-fill" bgColor="red" />
+                <CardIcon type="bi-briefcase-fill" bgColor="red" />
                 <CardTitle>Hallo</CardTitle>
               </CardHeader>
             </Card>
             <Card className="theme-wd mb-2">
               <CardHeader>
-                <CardIcon type="briefcase-fill" bgColor="red" />
+                <CardIcon type="bi-briefcase-fill" bgColor="red" />
                 <CardTitle>Hallo</CardTitle>
               </CardHeader>
               <CardBody>
@@ -614,7 +614,7 @@ function ToggleCard(props: {
   children: ReactNode | ReactNode[];
 }) {
   const {
-    icon = 'briefcase-fill',
+    icon = 'bi-briefcase-fill',
     iconBg = 'red',
     defaultOpen = false,
     title,
@@ -633,7 +633,7 @@ function ToggleCard(props: {
           {title}
         </CardTitle>
         <CardButton
-          type={show ? 'caret-up-fill' : 'caret-down-fill'}
+          type={show ? 'bi-caret-up-fill' : 'bi-caret-down-fill'}
           onClick={() => setShow(!show)}
         />
       </CardHeader>

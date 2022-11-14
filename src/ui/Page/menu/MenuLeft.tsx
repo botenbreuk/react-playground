@@ -18,7 +18,7 @@ export default function MenuLeft(props: Props) {
   return (
     <Col md={2} className="menu-left">
       <Icon
-        type="x"
+        type="bi-x"
         className="close-button"
         color="#244e9b"
         onClick={toggle}

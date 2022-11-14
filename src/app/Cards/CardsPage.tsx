@@ -11,6 +11,7 @@ import {
   Row
 } from 'reactstrap';
 import { Icon, Page } from '../../ui';
+import { IconType } from '../../ui/Icon/icon-types';
 import DescriptionList from '../../ui/List/DescriptionList';
 import DescriptionListItem from '../../ui/List/DescriptionListItem';
 import CardPanel from './CardPanel';
@@ -25,11 +26,10 @@ export type IconColor =
   | 'bg-info'
   | 'bg-orange'
   | 'bg-success';
-export type IconTypes = 'wrench' | 'lightning' | 'chain';
 
 export type CardObj = {
   title: string;
-  icon: IconTypes;
+  icon: IconType;
   iconColor: IconColor;
   body: ReactNode;
   footer?: ReactNode;
@@ -59,7 +59,7 @@ export default function CardsPage() {
           <div className="left"></div>
           <div className="right">
             <Icon
-              type={listMode ? 'grid-3x3-gap-fill' : 'list'}
+              type={listMode ? 'bi-grid-3x3-gap-fill' : 'bi-list'}
               className="p-2 bg-primary text-white"
               onClick={() => setListMode(!listMode)}
             />
@@ -88,7 +88,7 @@ export default function CardsPage() {
               key={index}
               title={title}
               footer={[
-                footer ? <CardIcon type="check" color="green" /> : undefined,
+                footer ? <CardIcon type="bi-check" color="green" /> : undefined,
                 <span className="text">{footer}</span>
               ]}
               icon={icon}

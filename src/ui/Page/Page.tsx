@@ -43,7 +43,7 @@ export default function Page(props: Props) {
                 <NavbarBrand>
                   <Row>
                     <Col>
-                      <Icon type="list" color="#244e9b" onClick={toggle} />
+                      <Icon type="bi-list" color="#244e9b" onClick={toggle} />
                     </Col>
                     <Col>
                       <Logo height={40} />
@@ -79,7 +79,7 @@ export default function Page(props: Props) {
           {scrollToTop && (
             <Icon
               className="scroll-to-top"
-              type="arrow-up-circle-fill"
+              type="bi-arrow-up-circle-fill"
               color="white"
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             />

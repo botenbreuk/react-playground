@@ -1,4 +1,5 @@
-import { CardObj, IconColor, IconTypes } from './CardsPage';
+import { IconType } from '../../ui/Icon/icon-types';
+import { CardObj, IconColor } from './CardsPage';
 
 const titles: string[] = [
   'Fancy title',
@@ -6,7 +7,7 @@ const titles: string[] = [
   'Bigger item title but not ot big',
   'Item'
 ];
-const icons: IconTypes[] = ['wrench', 'lightning', 'chain'];
+const icons: IconType[] = ['icon-onderhoud', 'icon-bolt', 'icon-broken'];
 const iconGbs: IconColor[] = ['bg-danger', 'bg-warning', 'bg-orange'];
 const progesses: number[] = [15, 25, 40, 55, 75, 100];
 

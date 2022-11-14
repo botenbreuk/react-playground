@@ -23,7 +23,7 @@ export default function MenuRight() {
           <Row>
             <Col xs={12} className="d-flex justify-content-end">
               <Icon
-                type="x"
+                type="bi-x"
                 className="close-button"
                 color="#ffffff"
                 onClick={toggle}
@@ -53,7 +53,7 @@ function RenderOpenButton({ toggle }: { toggle: () => void }) {
   return (
     <Button color="danger" onClick={toggle}>
       <Icon
-        type="people-fill"
+        type="bi-people-fill"
         className="menu-right-open-button"
         color="#fff"
       />

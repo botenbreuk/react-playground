@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import { Moment } from 'moment';
 import { ReactNode } from 'react';
 import {
   Card,
@@ -8,37 +9,51 @@ import {
   CardTitle,
   Progress
 } from 'reactstrap';
-import { IconType } from '../../ui/Icon/icon-types';
-import ScrollTo from '../../ui/ScrollTo/ScrollTo';
+import { IconType } from '../Icon/icon-types';
+import ScrollTo from '../ScrollTo/ScrollTo';
 import CardButton from './parts/CardButton';
 import CardIcon from './parts/CardIcon';
+import CardTimeRemainer from './parts/CardTimeRemainer';
 
-type IconBg =
+export type IconBg =
   | 'bg-primary'
   | 'bg-secondary'
   | 'bg-danger'
   | 'bg-warning'
   | 'bg-info'
   | 'bg-orange'
-  | 'bg-success';
+  | 'bg-yellow'
+  | 'bg-success'
+  | 'bg-aor-blue'
+  | 'bg-jgz-orange'
+  | 'bg-kt-green'
+  | 'bg-mm-blue'
+  | 'bg-transparent'
+  | 'bg-white';
 
-type Props = {
-  title: string;
-  icon: IconType;
+export type Props = {
+  title?: string | ReactNode;
+  icon?: IconType;
   iconBg?: IconBg;
   headerClick?: () => void;
-  customEdit?: ReactNode;
+  rightComponent?: ReactNode;
   editClick?: () => void;
   bigView?: boolean;
   className?: string;
-  children:
+  children?:
     | ((bigView: boolean) => ReactNode | ReactNode[])
     | ReactNode
     | ReactNode[];
-  footer?: ReactNode | ReactNode[];
+  footer?:
+    | ((bigView: boolean) => ReactNode | ReactNode[])
+    | ReactNode
+    | ReactNode[];
+  secondFooter?: ReactNode | ReactNode[];
   progress?: { current: number; max: number; suffix?: string };
-  time?: number;
+  date?: string | Moment;
   theme?: 'lg' | 'dg' | 'lw' | 'dw' | 'wd';
+  autoHeihgt?: boolean;
+  noScrollTo?: boolean;
 };
 
 export default function CardPanel(props: Props) {
@@ -47,15 +62,18 @@ export default function CardPanel(props: Props) {
     icon,
     iconBg = 'bg-primary',
     headerClick,
-    customEdit,
+    rightComponent,
     editClick,
     bigView = false,
     children,
     footer,
+    secondFooter,
     className,
     progress,
-    time,
-    theme = 'lg'
+    date,
+    theme = 'lg',
+    autoHeihgt = false,
+    noScrollTo = false
   } = props;
 
   function getProgressColor() {
@@ -78,33 +96,34 @@ export default function CardPanel(props: Props) {
   }
 
   const classes = classNames({ big: bigView }, className, `theme-${theme}`);
+  const cardBodyClasses = classNames({ 'auto-height': autoHeihgt && !bigView });
 
   const card = (
     <Card className={classes}>
       <CardHeader>
-        <CardIcon type={icon} bgColor={iconBg} />
+        {icon && <CardIcon type={icon} bgColor={iconBg} />}
         <CardTitle
           className={headerClick ? 'clickable' : ''}
           onClick={headerClick}
         >
           <span>{title}</span>
         </CardTitle>
-        {time && (
-          <div className="duration">
-            <div className="time">{time}</div>
-            <div className="time-type">days</div>
-          </div>
-        )}
+        <CardTimeRemainer date={date} />
 
-        {customEdit && <div className="right-component">{customEdit}</div>}
+        {rightComponent && (
+          <div className="right-component">{rightComponent}</div>
+        )}
 
         {editClick && (
-          <CardButton type="bi-pencil-fill" color="white" onClick={editClick} />
+          <CardButton type="icon-pencil" color="white" onClick={editClick} />
         )}
       </CardHeader>
-      <CardBody>
-        {typeof children === 'function' ? children(bigView) : children}
-      </CardBody>
+      {children && (
+        <CardBody className={cardBodyClasses}>
+          {typeof children === 'function' ? children(bigView) : children}
+        </CardBody>
+      )}
+
       {progress && (
         <div className="card-progress">
           <Progress value={progress.current} color={getProgressColor()}>
@@ -113,9 +132,14 @@ export default function CardPanel(props: Props) {
           </Progress>
         </div>
       )}
-      <CardFooter>{footer}</CardFooter>
+      {footer && (
+        <CardFooter>
+          {typeof footer === 'function' ? footer(bigView) : footer}
+        </CardFooter>
+      )}
+      {secondFooter && <div className="second-footer">{secondFooter}</div>}
     </Card>
   );
 
-  return bigView ? <ScrollTo>{card}</ScrollTo> : card;
+  return !noScrollTo && bigView ? <ScrollTo>{card}</ScrollTo> : card;
 }
